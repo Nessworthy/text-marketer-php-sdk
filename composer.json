@@ -1,0 +1,24 @@
+{
+  "name": "nessworthy/textmarketer-php-sdk",
+  "description": "A simple helper to allow you to send SMS messages easily.",
+  "minimum-stability": "stable",
+  "license": "proprietary",
+  "authors": [
+    {
+      "name": "Sean Nessworthy",
+      "email": "sean@nessworthy.me"
+    }
+  ],
+  "require": {
+    "php": ">=5.5.9"
+  },
+  "autoload": {
+    "psr-4": {
+      "Nessworthy\\TextMarketer\\" : "src/Nessworthy/TextMarketer/",
+      "Nessworthy\\TextMarketer\\Tests\\" : "tests/Nessworthy/TextMarketer/"
+    }
+  },
+  "require-dev": {
+    "phpunit/phpunit": "~5.7"
+  }
+}

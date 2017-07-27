@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<phpunit
+         colors="true"
+         processIsolation="false">
+
+    <testsuites>
+        <testsuite>
+            <directory>./tests/Nessworthy/TextMarketer</directory>
+        </testsuite>
+    </testsuites>
+
+    <filter>
+        <whitelist>
+            <directory suffix=".php">./src/Nessworthy/TextMarketer</directory>
+            <exclude>
+                <directory suffix="Exception.php">./src/Nessworthy/TextMarketer</directory>
+            </exclude>
+        </whitelist>
+    </filter>
+
+</phpunit>
