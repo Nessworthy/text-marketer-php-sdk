@@ -3,31 +3,21 @@ namespace Nessworthy\TextMarketer\Result;
 
 class SendSMSResult
 {
-    const STATUS_SENT = 'SENT';
-    const STATUS_QUEUED = 'QUEUED';
-    const STATUS_SCHEDULED = 'SCHEDULED';
+    const STATUS_SUCCESS = 'success';
+    const STATUS_QUEUED = 'queued';
+    const STATUS_SCHEDULED = 'scheduled';
 
-    private $dateProcessed;
     private $messageId;
-    private $scheduledId;
+    private $creditsRemaining;
     private $creditsUsed;
     private $status;
 
-    public function __construct(\DateTimeImmutable $processedDate, $messageId, $scheduledId, $creditsUsed, $status)
+    public function __construct($messageId, $creditsRemaining, $creditsUsed, $status)
     {
-        $this->dateProcessed = $processedDate;
         $this->messageId = (int) $messageId;
-        $this->scheduledId = (int) $scheduledId;
+        $this->creditsRemaining = (int) $creditsRemaining;
         $this->creditsUsed = (int) $creditsUsed;
         $this->status = $status;
-    }
-
-    /**
-     * @return \DateTimeImmutable
-     */
-    public function getDateProcessed()
-    {
-        return $this->dateProcessed;
     }
 
     /**
@@ -41,15 +31,15 @@ class SendSMSResult
     /**
      * @return int
      */
-    public function getScheduledID()
+    public function getCreditsRemaining()
     {
-        return $this->scheduledId;
+        return $this->creditsRemaining;
     }
 
     /**
      * @return int
      */
-    public function getCreditCost()
+    public function getCreditsUsed()
     {
         return $this->creditsUsed;
     }
@@ -59,7 +49,7 @@ class SendSMSResult
      */
     public function wasSent()
     {
-        return $this->status === self::STATUS_SENT;
+        return $this->status === self::STATUS_SUCCESS;
     }
 
     /**

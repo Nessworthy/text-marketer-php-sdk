@@ -31,6 +31,7 @@ abstract class UriDispatcher
         $queryParameters['to'] = implode(',', $message->getMessageRecipients());
         $queryParameters['message'] = $message->getMessageText();
         $queryParameters['orig'] = $message->getMessageOriginator();
+        $queryParameters['option'] = 'xml';
 
         $url = $uri . http_build_query($queryParameters);
 
@@ -56,23 +57,21 @@ abstract class UriDispatcher
         }
         $response = $responseCollection->item(0);
 
-        $dateProcessed = new \DateTimeImmutable($response->getAttribute('processed_date'));
-
-        $errorCollection = $response->getElementsByTagName('errors');
+        $errorCollection = $response->getElementsByTagName('reason');
         if ($errorCollection->length > 0) {
             $errors = [];
             /** @var \DOMElement $errorNode */
             foreach ($errorCollection as $errorNode) {
-                $errors[(int)$errorNode->getAttribute('code')] = $errorNode->textContent;
+                $errors[(int)$errorNode->getAttribute('id')] = $errorNode->textContent;
             }
             throw new SMSDispatchFailedException($errors);
         }
 
-        $messageId = (int) $response->getElementsByTagName('message_id')->item(0)->textContent;
-        $scheduledId = (int) $response->getElementsByTagName('scheduled_id')->item(0)->textContent;
+        $messageId = (int) $response->getAttribute('id');
+        $creditsRemaining = (int) $response->getElementsByTagName('credits')->item(0)->textContent;
         $creditsUsed = (int) $response->getElementsByTagName('credits_used')->item(0)->textContent;
-        $status = $response->getElementsByTagName('status')->item(0)->textContent;
+        $status = $response->getAttribute('status');
 
-        return new SendSMSResult($dateProcessed, $messageId, $scheduledId, $creditsUsed, $status);
+        return new SendSMSResult($messageId, $creditsUsed, $creditsRemaining, $status);
     }
 }
