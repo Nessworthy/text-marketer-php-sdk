@@ -1,6 +1,6 @@
 {
   "name": "nessworthy/textmarketer-php-sdk",
-  "description": "A simple helper to allow you to send SMS messages easily.",
+  "description": "An unofficial helper to allow you to send SMS messages using Text Marketer.",
   "minimum-stability": "stable",
   "license": "proprietary",
   "authors": [

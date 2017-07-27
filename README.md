@@ -4,7 +4,7 @@ An unofficial library-in-progress to assist with text marketer operations.
 
 ## Requirements
 
-* PHP 5.5+, PHP7+
+* PHP 5.5.9+, PHP7+
 * ext_mbstring
 
 ## Composer
