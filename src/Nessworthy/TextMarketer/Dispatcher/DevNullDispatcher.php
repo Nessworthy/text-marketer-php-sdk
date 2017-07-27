@@ -12,11 +12,10 @@ class DevNullDispatcher implements \Nessworthy\TextMarketer\Dispatcher\Dispatche
     public function dispatchSMSMessage(\Nessworthy\TextMarketer\Message\Message $message)
     {
         return new \Nessworthy\TextMarketer\Result\SendSMSResult(
-            new DateTimeImmutable(),
             0,
+            9999,
             0,
-            0,
-            \Nessworthy\TextMarketer\Result\SendSMSResult::STATUS_SENT
+            \Nessworthy\TextMarketer\Result\SendSMSResult::STATUS_SUCCESS
         );
     }
 }
