@@ -23,7 +23,7 @@ use Nessworthy\TextMarketer\TextMarketer;
 use Nessworthy\TextMarketer\Dispatcher\ProductionDispatcher;
 use Nessworthy\TextMarketer\Message\SimpleMessage;
 use Nessworthy\TextMarketer\Authentication\SimpleAuthentication;
-use \Nessworthy\TextMarketer\Dispatcher\SMSDispatchFailedException;
+use Nessworthy\TextMarketer\Dispatcher\SMSDispatchFailedException;
 
 
 // Your API credentials.
