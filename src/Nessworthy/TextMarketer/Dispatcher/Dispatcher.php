@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types=1);
 namespace Nessworthy\TextMarketer\Dispatcher;
 
 use Nessworthy\TextMarketer\Message\Message;
@@ -11,5 +11,5 @@ interface Dispatcher
      * @throws SMSDispatchFailedException
      * @return SendSMSResult
      */
-    public function dispatchSMSMessage(Message $message);
+    public function dispatchSMSMessage(Message $message): SendSMSResult;
 }

@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types=1);
 namespace Nessworthy\TextMarketer\Authentication;
 
 class SimpleAuthentication implements Authentication
@@ -11,43 +11,23 @@ class SimpleAuthentication implements Authentication
      * @param string $password Your text marketer API password.
      * @throws InvalidAuthenticationException Thrown if the details provided don't pass basic validation.
      */
-    public function __construct($userName, $password)
+    public function __construct(string $userName, string $password)
     {
-        if (!is_string($userName)) {
-            throw new InvalidAuthenticationException(
-                sprintf(
-                    'A string was expected for your text marketer user name, %s given.',
-                    gettype($userName)
-                ),
-                InvalidAuthenticationException::E_INVALID_USERNAME
-            );
-        }
-
-        if (strlen($userName) < 6) {
+        if (\strlen($userName) < 6) {
             throw new InvalidAuthenticationException(
                 sprintf(
                     'Your text marketer user name should be at least 6 characters, %s given.',
-                    strlen($userName)
+                    \strlen($userName)
                 ),
                 InvalidAuthenticationException::E_INVALID_USERNAME
             );
         }
 
-        if (!is_string($password)) {
-            throw new InvalidAuthenticationException(
-                sprintf(
-                    'A string was expected for your text marketer password, %s given.',
-                    gettype($password)
-                ),
-                InvalidAuthenticationException::E_INVALID_PASSWORD
-            );
-        }
-
-        if (strlen($password) < 6) {
+        if (\strlen($password) < 6) {
             throw new InvalidAuthenticationException(
                 sprintf(
                     'Your text marketer password should be at least 6 characters, %s given.',
-                    strlen($password)
+                    \strlen($password)
                 ),
                 InvalidAuthenticationException::E_INVALID_PASSWORD
             );
@@ -60,7 +40,7 @@ class SimpleAuthentication implements Authentication
     /**
      * @inheritDoc
      */
-    public function getUserName()
+    public function getUserName(): string
     {
         return $this->userName;
     }
@@ -68,7 +48,7 @@ class SimpleAuthentication implements Authentication
     /**
      * @inheritDoc
      */
-    public function getPassword()
+    public function getPassword(): string
     {
         return $this->password;
     }

@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types=1);
 namespace Nessworthy\TextMarketer\Result;
 
 class SendSMSResult
@@ -12,18 +12,18 @@ class SendSMSResult
     private $creditsUsed;
     private $status;
 
-    public function __construct($messageId, $creditsRemaining, $creditsUsed, $status)
+    public function __construct(int $messageId, int $creditsRemaining, int $creditsUsed, string $status)
     {
-        $this->messageId = (int) $messageId;
-        $this->creditsRemaining = (int) $creditsRemaining;
-        $this->creditsUsed = (int) $creditsUsed;
+        $this->messageId = $messageId;
+        $this->creditsRemaining = $creditsRemaining;
+        $this->creditsUsed = $creditsUsed;
         $this->status = $status;
     }
 
     /**
      * @return int
      */
-    public function getMessageID()
+    public function getMessageID(): int
     {
         return $this->messageId;
     }
@@ -31,7 +31,7 @@ class SendSMSResult
     /**
      * @return int
      */
-    public function getCreditsRemaining()
+    public function getCreditsRemaining(): int
     {
         return $this->creditsRemaining;
     }
@@ -39,7 +39,7 @@ class SendSMSResult
     /**
      * @return int
      */
-    public function getCreditsUsed()
+    public function getCreditsUsed(): int
     {
         return $this->creditsUsed;
     }
@@ -47,7 +47,7 @@ class SendSMSResult
     /**
      * @return bool
      */
-    public function wasSent()
+    public function wasSent(): bool
     {
         return $this->status === self::STATUS_SUCCESS;
     }
@@ -55,7 +55,7 @@ class SendSMSResult
     /**
      * @return bool
      */
-    public function wasQueued()
+    public function wasQueued(): bool
     {
         return $this->status === self::STATUS_QUEUED;
     }
@@ -63,15 +63,15 @@ class SendSMSResult
     /**
      * @return bool
      */
-    public function wasScheduled()
+    public function wasScheduled(): bool
     {
         return $this->status === self::STATUS_SCHEDULED;
     }
 
     /**
-     * @return mixed
+     * @return string
      */
-    public function getStatus()
+    public function getStatus(): string
     {
         return $this->status;
     }

@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types=1);
 namespace Nessworthy\TextMarketer\Authentication;
 
 /**
@@ -12,11 +12,11 @@ interface Authentication
      * Retrieve the user name.
      * @return string
      */
-    public function getUserName();
+    public function getUserName(): string;
 
     /**
      * Retrieve the password.
      * @return string
      */
-    public function getPassword();
+    public function getPassword(): string;
 }

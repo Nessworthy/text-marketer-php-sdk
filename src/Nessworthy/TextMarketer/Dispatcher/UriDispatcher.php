@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types=1);
 namespace Nessworthy\TextMarketer\Dispatcher;
 
 use Nessworthy\TextMarketer\Authentication\Authentication;
@@ -24,7 +24,7 @@ abstract class UriDispatcher
     public function dispatchSMSMessageRequestToUri(
         $uri,
         Message $message
-    ) {
+    ): SendSMSResult {
         $queryParameters = [];
         $queryParameters['username'] = $this->authentication->getUserName();
         $queryParameters['password'] = $this->authentication->getPassword();

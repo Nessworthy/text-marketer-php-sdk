@@ -1,21 +1,21 @@
-<?php
+<?php declare(strict_types=1);
+namespace Nessworthy\TextMarketer\Dispatcher;
+
+use Nessworthy\TextMarketer\Message\Message;
+use Nessworthy\TextMarketer\Result\MockSMSResult;
+use Nessworthy\TextMarketer\Result\SendSMSResult;
 
 /**
  * DevNull dispatcher will eat all requests and do nothing with them.
  * Will always return a successful response.
  */
-class DevNullDispatcher implements \Nessworthy\TextMarketer\Dispatcher\Dispatcher
+class DevNullDispatcher implements Dispatcher
 {
     /**
      * @inheritdoc
      */
-    public function dispatchSMSMessage(\Nessworthy\TextMarketer\Message\Message $message)
+    public function dispatchSMSMessage(Message $message): SendSMSResult
     {
-        return new \Nessworthy\TextMarketer\Result\SendSMSResult(
-            0,
-            9999,
-            0,
-            \Nessworthy\TextMarketer\Result\SendSMSResult::STATUS_SUCCESS
-        );
+        return new MockSMSResult();
     }
 }

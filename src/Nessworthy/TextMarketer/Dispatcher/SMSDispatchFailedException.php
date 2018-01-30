@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types=1);
 namespace Nessworthy\TextMarketer\Dispatcher;
 
 use Nessworthy\TextMarketer\TextMarketerException;
