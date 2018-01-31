@@ -16,7 +16,7 @@ class PhoneNumberCollection
     {
         $phoneNumbers = array_values($phoneNumbers);
 
-        if (count($phoneNumbers) === 0) {
+        if (\count($phoneNumbers) === 0) {
             throw new InvalidMessageException(
                 'Messages must be sent to at least one recipient. None were provided.',
                 InvalidMessageException::E_RECIPIENTS_TOO_FEW
@@ -24,23 +24,23 @@ class PhoneNumberCollection
         }
 
         // TODO: Support up to more, but trickle at the dispatcher level.
-        if (count($phoneNumbers) > 500) {
+        if (\count($phoneNumbers) > 500) {
             throw new InvalidMessageException(
                 sprintf(
                     'Up to 500 recipients can be used for a single message. You have somehow exceeded that limit by trying to send this to %s recipients.',
-                    count($phoneNumbers)
+                    \count($phoneNumbers)
                 ),
                 InvalidMessageException::E_RECIPIENTS_TOO_MANY
             );
         }
 
         foreach ($phoneNumbers as $index => $phoneNumber) {
-            if (!is_string($phoneNumber)) {
+            if (!\is_string($phoneNumber)) {
                 throw new InvalidMessageException(
                     sprintf(
                         'Recipients must only be provided as strings. The recipient as position %s was of type %s.',
                         $index,
-                        gettype($phoneNumber)
+                        \gettype($phoneNumber)
                     ),
                     InvalidMessageException::E_RECIPIENTS_INVALID
                 );
@@ -62,7 +62,7 @@ class PhoneNumberCollection
     /**
      * @return string[]
      */
-    public function getAllRecipients()
+    public function getAllRecipients(): array
     {
         return $this->phoneNumbers;
     }

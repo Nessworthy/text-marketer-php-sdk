@@ -15,19 +15,9 @@ class Originator
      *                           to the recipient, e.g. 447777123123 for a UK number.
      * @throws InvalidMessageException
      */
-    public function __construct($originator)
+    public function __construct(string $originator)
     {
-        if (!is_string($originator)) {
-            throw new InvalidMessageException(
-                sprintf(
-                    'The originator was expected to be a string, %s given.',
-                    gettype($originator)
-                ),
-                InvalidMessageException::E_ORIGINATOR_INVALID
-            );
-        }
-
-        $length = strlen($originator);
+        $length = \strlen($originator);
         if ($length > 16 || (!is_numeric($originator) && $length > 11)) {
             throw new InvalidMessageException(
                 sprintf(
