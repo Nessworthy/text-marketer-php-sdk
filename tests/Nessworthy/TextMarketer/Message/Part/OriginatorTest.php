@@ -20,6 +20,7 @@ class OriginatorTest extends TestCase
 
     /**
      * @dataProvider alphaNumericOriginatorsOverElevenCharactersProvider
+     * @param string $originatorString
      */
     public function testAlphaNumericOriginatorsOver11CharactersThrowInvalidMessageException(string $originatorString)
     {
