@@ -14,7 +14,6 @@ class SendMessage
     private $originator;
     private $customTag;
     private $validity;
-    private $scheduledTime;
     private $checkSTOP;
 
     /**
@@ -34,7 +33,6 @@ class SendMessage
      *                          If used, must be an 1-20 character alpha-numeric string.
      * @param int $validForHours An optional amount in hours to allow the message to attempt be sent for.
      *                           If used, must be inclusively between 1 and 72.
-     * @param \DateTimeImmutable $scheduledTime An optional date / time to schedule a text message to be sent out at.
      * @param bool $checkSTOP If true, the recipient numbers will be checked against the STOP group.
      * @param string $txtUsEmail An email address for incoming responses. Must match a txtUs Enterprise originator.
      *                           Only available for txtUs Enterprise users.
@@ -47,7 +45,6 @@ class SendMessage
         string $originator,
         string $customTag = null,
         int $validForHours = null,
-        \DateTimeImmutable $scheduledTime = null,
         bool $checkSTOP = false,
         string $txtUsEmail = null
     ) {
@@ -57,7 +54,6 @@ class SendMessage
         $this->originator = new Originator($originator);
         $this->customTag = $customTag ? new CustomTag($customTag) : null;
         $this->validity = $validForHours ? new Validity($validForHours) : null;
-        $this->scheduledTime = $scheduledTime ?? null;
         $this->checkSTOP = $checkSTOP;
     }
 
