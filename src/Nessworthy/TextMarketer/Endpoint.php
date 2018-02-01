@@ -58,6 +58,13 @@ interface Endpoint
     public function getAccountInformationForAccountId(string $accountId): AccountInformation;
 
     /**
+     * Update account information for the account in use.
+     * @param UpdateAccountInformation $newAccountInformation
+     * @return AccountInformation
+     */
+    public function updateAccountInformation(UpdateAccountInformation $newAccountInformation): AccountInformation;
+
+    /**
      * Create a new sub-account for the account in use.
      * Note - This feature is disabled by default until you request Text Marketer to enable it.
      * @param CreateSubAccount $subAccountDetails
