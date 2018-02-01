@@ -113,19 +113,6 @@ class SendMessage
         return $this->validity->toInt();
     }
 
-    public function hasScheduledTime(): bool
-    {
-        return $this->scheduledTime !== null;
-    }
-
-    /**
-     * @return \DateTimeImmutable|null
-     */
-    public function getScheduledTime(): ?\DateTimeImmutable
-    {
-        return $this->scheduledTime;
-    }
-
     /**
      * @return bool
      */

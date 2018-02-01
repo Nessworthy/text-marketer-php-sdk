@@ -1,6 +1,6 @@
 <?php declare(strict_types=1);
 
-namespace Nessworthy\TextMarketer\Account;
+namespace Nessworthy\TextMarketer\Account\Command;
 
 class CreateSubAccount
 {

@@ -3,7 +3,7 @@
 namespace Nessworthy\TextMarketer;
 
 use Nessworthy\TextMarketer\Account\AccountInformation;
-use Nessworthy\TextMarketer\Account\CreateSubAccount;
+use Nessworthy\TextMarketer\Account\Command\CreateSubAccount;
 use Nessworthy\TextMarketer\Authentication\Authentication;
 use Nessworthy\TextMarketer\Message\DeliveryReport;
 use Nessworthy\TextMarketer\Message\Part\PhoneNumberCollection;
