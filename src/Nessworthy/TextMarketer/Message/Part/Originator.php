@@ -34,6 +34,7 @@ class Originator
                 InvalidMessageException::E_ORIGINATOR_TOO_SHORT
             );
         }
+
         $this->originator = $originator;
     }
 

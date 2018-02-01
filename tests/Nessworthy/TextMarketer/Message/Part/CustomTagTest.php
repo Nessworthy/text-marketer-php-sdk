@@ -8,6 +8,12 @@ use PHPUnit\Framework\TestCase;
 
 class CustomTagTest extends TestCase
 {
+    public function testUsingAcceptableTagIsRetrievable()
+    {
+        $tag = new CustomTag('MyCustomTag');
+        $this->assertEquals('MyCustomTag', $tag->toString());
+    }
+
     public function testUsingAnEmptyTagThrowsInvalidMessageException()
     {
         $this->expectException(InvalidMessageException::class);

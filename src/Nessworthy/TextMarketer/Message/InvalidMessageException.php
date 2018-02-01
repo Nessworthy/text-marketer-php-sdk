@@ -71,4 +71,14 @@ class InvalidMessageException extends  TextMarketerException
      * Used when the custom tag supplied is not alpha-numeric.
      */
     public const E_CUSTOM_TAG_INVALID = 533;
+
+    /**
+     * Used when the hour validity supplied is less than 1.
+     */
+    public const E_VALIDITY_TOO_LOW = 601;
+
+    /**
+     * Used when the hour validity supplied is over 72.
+     */
+    public const E_VALIDITY_TOO_HIGH = 602;
 }
