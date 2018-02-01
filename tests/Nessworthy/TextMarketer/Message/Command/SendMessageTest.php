@@ -1,8 +1,8 @@
 <?php declare(strict_types=1);
 
-namespace Nessworthy\TextMarketer\Tests\Message;
+namespace Nessworthy\TextMarketer\Tests\Message\Command;
 
-use Nessworthy\TextMarketer\Message\SendMessage;
+use Nessworthy\TextMarketer\Message\Command\SendMessage;
 use PHPUnit\Framework\TestCase;
 
 /**

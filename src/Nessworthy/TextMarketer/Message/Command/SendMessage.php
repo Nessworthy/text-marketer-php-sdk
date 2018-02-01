@@ -1,5 +1,5 @@
 <?php declare(strict_types=1);
-namespace Nessworthy\TextMarketer\Message;
+namespace Nessworthy\TextMarketer\Message\Command;
 
 use Nessworthy\TextMarketer\Message\Part\MessagePayload;
 use Nessworthy\TextMarketer\Message\Part\Originator;
