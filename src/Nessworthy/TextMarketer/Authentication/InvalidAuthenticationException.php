@@ -8,15 +8,15 @@ use Nessworthy\TextMarketer\TextMarketerException;
  * When handling error responses, you should use the error code constants to determine what went wrong.
  * @package Nessworthy\TextMarketer\Authentication
  */
-class InvalidAuthenticationException extends TextMarketerException
+final class InvalidAuthenticationException extends TextMarketerException
 {
     /**
      * Given when your username is not valid. For example, if it is not a string.
      */
-    const E_INVALID_USERNAME = 501;
+    public const E_INVALID_USERNAME = 501;
 
     /**
      * Given when your password is not valid. For example, if it is not a string.
      */
-    const E_INVALID_PASSWORD = 502;
+    public const E_INVALID_PASSWORD = 502;
 }

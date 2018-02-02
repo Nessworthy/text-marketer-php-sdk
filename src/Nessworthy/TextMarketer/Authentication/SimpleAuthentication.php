@@ -1,7 +1,7 @@
 <?php declare(strict_types=1);
 namespace Nessworthy\TextMarketer\Authentication;
 
-class SimpleAuthentication implements Authentication
+final class SimpleAuthentication implements Authentication
 {
     private $userName;
     private $password;
@@ -32,6 +32,8 @@ class SimpleAuthentication implements Authentication
                 InvalidAuthenticationException::E_INVALID_PASSWORD
             );
         }
+
+        // TODO: U/N + P/W are <= 20 chars.
 
         $this->userName = $userName;
         $this->password = $password;

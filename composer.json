@@ -16,7 +16,11 @@
   },
   "autoload": {
     "psr-4": {
-      "Nessworthy\\TextMarketer\\" : "src/Nessworthy/TextMarketer/",
+      "Nessworthy\\TextMarketer\\" : "src/Nessworthy/TextMarketer/"
+    }
+  },
+  "autoload-dev": {
+    "psr-4": {
       "Nessworthy\\TextMarketer\\Tests\\" : "tests/Nessworthy/TextMarketer/"
     }
   },

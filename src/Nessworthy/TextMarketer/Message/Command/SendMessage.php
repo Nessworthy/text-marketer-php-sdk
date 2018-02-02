@@ -15,6 +15,10 @@ class SendMessage
     private $customTag;
     private $validity;
     private $checkSTOP;
+    /**
+     * @var string
+     */
+    private $txtUsEmail;
 
     /**
      * @param string $message The text message payload.
@@ -55,6 +59,7 @@ class SendMessage
         $this->customTag = $customTag ? new CustomTag($customTag) : null;
         $this->validity = $validForHours ? new Validity($validForHours) : null;
         $this->checkSTOP = $checkSTOP;
+        $this->txtUsEmail = $txtUsEmail;
     }
 
     /**
@@ -119,5 +124,10 @@ class SendMessage
     public function isCheckSTOPEnabled(): bool
     {
         return $this->checkSTOP;
+    }
+
+    public function getTxtUsEmail(): ?string
+    {
+        return $this->txtUsEmail;
     }
 }

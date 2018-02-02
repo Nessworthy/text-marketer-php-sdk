@@ -6,9 +6,16 @@ use Nessworthy\TextMarketer\Account\AccountInformation;
 use Nessworthy\TextMarketer\Account\Command\CreateSubAccount;
 use Nessworthy\TextMarketer\Account\Command\UpdateAccountInformation;
 use Nessworthy\TextMarketer\Authentication\Authentication;
-use Nessworthy\TextMarketer\Message\DeliveryReport;
+use Nessworthy\TextMarketer\Credit\TransferReport;
+use Nessworthy\TextMarketer\DeliveryReport\DateRange;
+use Nessworthy\TextMarketer\DeliveryReport\DeliveryReportCollection;
+use Nessworthy\TextMarketer\Keyword\KeywordAvailability;
+use Nessworthy\TextMarketer\Message\MessageDeliveryReport;
 use Nessworthy\TextMarketer\Message\Part\PhoneNumberCollection;
 use Nessworthy\TextMarketer\Message\Command\SendMessage;
+use Nessworthy\TextMarketer\SendGroup\AddNumbersToGroupReport;
+use Nessworthy\TextMarketer\SendGroup\SendGroup;
+use Nessworthy\TextMarketer\SendGroup\SendGroupSummaryCollection;
 
 /**
  * Interface Endpoint
@@ -25,17 +32,17 @@ interface Endpoint
     /**
      * Send an SMS message.
      * @param SendMessage $message
-     * @return DeliveryReport
+     * @return MessageDeliveryReport
      */
-    public function sendMessage(SendMessage $message): DeliveryReport;
+    public function sendMessage(SendMessage $message): MessageDeliveryReport;
 
     /**
      * Schedule an SMS message to be sent out at a given date.
      * @param SendMessage $message
      * @param \DateTimeImmutable $deliveryTime
-     * @return DeliveryReport
+     * @return MessageDeliveryReport
      */
-    public function sendScheduledMessage(SendMessage $message, \DateTimeImmutable $deliveryTime): DeliveryReport;
+    public function sendScheduledMessage(SendMessage $message, \DateTimeImmutable $deliveryTime): MessageDeliveryReport;
 
     /**
      * Delete a scheduled SMS message.
@@ -82,16 +89,16 @@ interface Endpoint
     /**
      * Transfer credits from the account in use to another account using its account ID.
      * @param string $destinationAccountId
-     * @return CreditTransferReport
+     * @return TransferReport
      */
-    public function transferCreditsToAccountById(string $destinationAccountId): CreditTransferReport;
+    public function transferCreditsToAccountById(string $destinationAccountId): TransferReport;
 
     /**
      * Transfer credits from the account in use to another account using its username and password.
      * @param Authentication $destinationAccountDetails
-     * @return CreditTransferReport
+     * @return TransferReport
      */
-    public function transferCreditsToAccountByCredentials(Authentication $destinationAccountDetails): CreditTransferReport;
+    public function transferCreditsToAccountByCredentials(Authentication $destinationAccountDetails): TransferReport;
 
     /**
      * Retrieve the full list of delivery reports available for the account in use.
@@ -140,9 +147,9 @@ interface Endpoint
 
     /**
      * Retrieve the full list of groups for the account in use.
-     * @return SendGroupCollection
+     * @return SendGroupSummaryCollection
      */
-    public function getGroupsList(): SendGroupCollection;
+    public function getGroupsList(): SendGroupSummaryCollection;
 
     /**
      * Add one or more numbers to a group.
@@ -155,14 +162,14 @@ interface Endpoint
     /**
      * Create a new group.
      * @param string $groupName
-     * @return GroupReport
+     * @return SendGroup
      */
-    public function createGroup(string $groupName): GroupReport;
+    public function createGroup(string $groupName): SendGroup;
 
     /**
      * Retrieve information for a given group.
      * @param string $groupNameOrId
-     * @return GroupReport
+     * @return SendGroup
      */
-    public function getGroupInformation(string $groupNameOrId): GroupReport;
+    public function getGroupInformation(string $groupNameOrId): SendGroup;
 }

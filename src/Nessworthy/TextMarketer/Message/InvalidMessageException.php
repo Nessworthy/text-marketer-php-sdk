@@ -3,7 +3,7 @@ namespace Nessworthy\TextMarketer\Message;
 
 use Nessworthy\TextMarketer\TextMarketerException;
 
-class InvalidMessageException extends  TextMarketerException
+final class InvalidMessageException extends  TextMarketerException
 {
     /**
      * Used when the supplied message payload is not a string.

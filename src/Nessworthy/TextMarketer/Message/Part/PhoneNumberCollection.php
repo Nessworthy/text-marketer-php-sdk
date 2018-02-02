@@ -3,7 +3,7 @@ namespace Nessworthy\TextMarketer\Message\Part;
 
 use Nessworthy\TextMarketer\Message\InvalidMessageException;
 
-class PhoneNumberCollection
+final class PhoneNumberCollection
 {
     private $phoneNumbers;
 
@@ -65,5 +65,10 @@ class PhoneNumberCollection
     public function getAllRecipients(): array
     {
         return $this->phoneNumbers;
+    }
+
+    public function getTotal(): int
+    {
+        return \count($this->phoneNumbers);
     }
 }

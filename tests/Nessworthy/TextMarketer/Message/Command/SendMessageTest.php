@@ -18,11 +18,22 @@ class SendMessageTest extends TestCase
         $message = new SendMessage(
             'My test message',
             ['447777777'],
-            'Testing'
+            'Testing',
+            'customtag',
+            50,
+            true,
+            'my.email@address.com'
         );
 
         $this->assertEquals('My test message', $message->getMessageText());
         $this->assertEquals(['447777777'], $message->getMessageRecipients());
         $this->assertEquals('Testing', $message->getMessageOriginator());
+        $this->assertEquals('customtag', $message->getCustomTag());
+        $this->assertEquals(50, $message->getValidity());
+        $this->assertEquals(true, $message->isCheckSTOPEnabled());
+        $this->assertEquals('my.email@address.com', $message->getTxtUsEmail());
+
+        $this->assertTrue($message->hasHourValidity());
+        $this->assertTrue($message->hasCustomTag());
     }
 }

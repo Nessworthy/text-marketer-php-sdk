@@ -4,7 +4,7 @@ namespace Nessworthy\TextMarketer\Account;
 
 use Nessworthy\TextMarketer\TextMarketerException;
 
-class AccountInformationException extends TextMarketerException
+final class AccountInformationException extends TextMarketerException
 {
     /**
      * Signifies that the account username provided is too short.

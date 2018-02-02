@@ -6,7 +6,7 @@ use Nessworthy\TextMarketer\Message\InvalidMessageException;
  * A value object which contains and validates the message payload.
  * @package Nessworthy\TextMarketer\Message
  */
-class MessagePayload
+final class MessagePayload
 {
     private $payload;
 

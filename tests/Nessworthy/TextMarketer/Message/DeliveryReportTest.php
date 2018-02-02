@@ -2,14 +2,14 @@
 
 namespace Nessworthy\TextMarketer\Tests\Account;
 
-use Nessworthy\TextMarketer\Message\DeliveryReport;
+use Nessworthy\TextMarketer\Message\MessageDeliveryReport;
 use PHPUnit\Framework\TestCase;
 
 class DeliveryReportTest extends TestCase
 {
     public function testSentDeliveryReportGettersAllReturnCorrectData()
     {
-        $report = DeliveryReport::createSent(
+        $report = MessageDeliveryReport::createSent(
             '00000000001',
             10
         );
@@ -26,7 +26,7 @@ class DeliveryReportTest extends TestCase
 
     public function testQueuedDeliveryReportGettersAllReturnCorrectData()
     {
-        $report = DeliveryReport::createQueued(
+        $report = MessageDeliveryReport::createQueued(
             '00000000002',
             10
         );
@@ -43,7 +43,7 @@ class DeliveryReportTest extends TestCase
 
     public function testScheduledDeliveryReportGettersAllReturnCorrectData()
     {
-        $report = DeliveryReport::createScheduled(
+        $report = MessageDeliveryReport::createScheduled(
             '00000000003',
             10
         );
@@ -57,4 +57,6 @@ class DeliveryReportTest extends TestCase
 
         $this->assertNull($report->getMessageId());
     }
+
+
 }

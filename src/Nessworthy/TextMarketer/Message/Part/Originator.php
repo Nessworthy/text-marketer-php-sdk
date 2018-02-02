@@ -3,7 +3,7 @@ namespace Nessworthy\TextMarketer\Message\Part;
 
 use Nessworthy\TextMarketer\Message\InvalidMessageException;
 
-class Originator
+final class Originator
 {
     private $originator;
 

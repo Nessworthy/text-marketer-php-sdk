@@ -2,7 +2,7 @@
 
 namespace Nessworthy\TextMarketer\Account;
 
-class AccountInformation
+final class AccountInformation
 {
     /**
      * @var string

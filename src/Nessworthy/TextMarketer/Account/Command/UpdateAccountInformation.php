@@ -43,10 +43,6 @@ class UpdateAccountInformation
      * @var string
      */
     private $notificationMobile;
-    /**
-     * @var bool
-     */
-    private $overridePricing;
 
     /**
      * UpdateAccountInformation constructor.
@@ -57,7 +53,6 @@ class UpdateAccountInformation
      * @param string|null $companyName
      * @param string|null $notificationEmail
      * @param string|null $notificationMobile
-     * @param bool|null $overridePricing
      * @throws AccountInformationException
      */
     public function __construct(
@@ -67,8 +62,7 @@ class UpdateAccountInformation
         string $apiPassword = null,
         string $companyName = null,
         string $notificationEmail = null,
-        string $notificationMobile = null,
-        bool $overridePricing = null
+        string $notificationMobile = null
     ) {
         $this->handleAccountUserName($accountUserName);
         $this->handleAccountPassword($accountPassword);
@@ -77,7 +71,6 @@ class UpdateAccountInformation
         $this->handleCompanyName($companyName);
         $this->handleNotificationEmail($notificationEmail);
         $this->handleNotificationMobile($notificationMobile);
-        $this->overridePricing = $overridePricing;
     }
 
     /**
@@ -121,17 +114,9 @@ class UpdateAccountInformation
     }
 
     /**
-     * @return bool|null
-     */
-    public function isOverridePricing(): ?bool
-    {
-        return $this->overridePricing;
-    }
-
-    /**
      * @return string
      */
-    public function getAccountApiUserName(): string
+    public function getApiUserName(): ?string
     {
         return $this->accountApiUserName;
     }
@@ -139,7 +124,7 @@ class UpdateAccountInformation
     /**
      * @return string
      */
-    public function getAccountApiPassword(): string
+    public function getApiPassword(): ?string
     {
         return $this->accountApiPassword;
     }
@@ -312,7 +297,7 @@ class UpdateAccountInformation
                 AccountInformationException::E_NOTIFICATION_EMAIL_INVALID
             );
         }
-        $this->companyName = $notificationEmail;
+        $this->notificationEmail = $notificationEmail;
     }
 
     /**

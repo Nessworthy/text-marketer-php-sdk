@@ -6,4 +6,4 @@ namespace Nessworthy\TextMarketer;
  * Used to identify all text marketer exceptions.
  * @package Nessworthy\TextMarketer
  */
-class TextMarketerException extends \Exception {}
+abstract class TextMarketerException extends \Exception {}

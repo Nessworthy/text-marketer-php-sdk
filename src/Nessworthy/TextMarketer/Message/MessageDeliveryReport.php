@@ -2,7 +2,7 @@
 
 namespace Nessworthy\TextMarketer\Message;
 
-class DeliveryReport
+final class MessageDeliveryReport
 {
     private const STATUS_SENT = 'SENT';
     private const STATUS_QUEUED = 'QUEUED';
@@ -29,36 +29,21 @@ class DeliveryReport
         string $messageId,
         int $creditsUsed
     ): self {
-        return new self(
-            $messageId,
-            null,
-            $creditsUsed,
-            self::STATUS_SENT
-        );
+        return new self($messageId, null, $creditsUsed, self::STATUS_SENT);
     }
 
     public static function createScheduled(
         string $scheduleId,
         int $creditsUsed
     ): self {
-        return new self(
-            null,
-            $scheduleId,
-            $creditsUsed,
-            self::STATUS_SCHEDULED
-        );
+        return new self(null, $scheduleId, $creditsUsed, self::STATUS_SCHEDULED);
     }
 
     public static function createQueued(
         string $messageId,
         int $creditsUsed
     ): self {
-        return new self(
-            $messageId,
-            null,
-            $creditsUsed,
-            self::STATUS_QUEUED
-        );
+        return new self($messageId, null, $creditsUsed, self::STATUS_QUEUED);
     }
 
     private function __construct(

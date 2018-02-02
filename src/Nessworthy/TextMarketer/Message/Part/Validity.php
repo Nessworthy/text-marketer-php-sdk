@@ -4,7 +4,7 @@ namespace Nessworthy\TextMarketer\Message\Part;
 
 use Nessworthy\TextMarketer\Message\InvalidMessageException;
 
-class Validity
+final class Validity
 {
     private $hours;
 
