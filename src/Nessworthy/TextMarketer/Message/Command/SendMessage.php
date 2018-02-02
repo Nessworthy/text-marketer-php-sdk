@@ -1,6 +1,7 @@
 <?php declare(strict_types=1);
 namespace Nessworthy\TextMarketer\Message\Command;
 
+use Nessworthy\TextMarketer\Message\InvalidMessageException;
 use Nessworthy\TextMarketer\Message\Part\MessagePayload;
 use Nessworthy\TextMarketer\Message\Part\Originator;
 use Nessworthy\TextMarketer\Message\Part\PhoneNumberCollection;
@@ -54,7 +55,7 @@ class SendMessage
     ) {
         // I don't mind making this a bit easier for the user by not having them produce value objects.
         $this->payload = new MessagePayload($message);
-        $this->phoneNumbers = new PhoneNumberCollection($phoneNumbers);
+        $this->handlePhoneNumbers($phoneNumbers);
         $this->originator = new Originator($originator);
         $this->customTag = $customTag ? new CustomTag($customTag) : null;
         $this->validity = $validForHours ? new Validity($validForHours) : null;
@@ -129,5 +130,34 @@ class SendMessage
     public function getTxtUsEmail(): ?string
     {
         return $this->txtUsEmail;
+    }
+
+    /**
+     * @param string[] $phoneNumbers
+     * @throws InvalidMessageException
+     */
+    private function handlePhoneNumbers(array $phoneNumbers): void
+    {
+        $numbers = new PhoneNumberCollection($phoneNumbers);
+
+        if ($numbers->getTotal() === 0) {
+            throw new InvalidMessageException(
+                'Messages must be sent to at least one recipient. None were provided.',
+                InvalidMessageException::E_RECIPIENTS_TOO_FEW
+            );
+        }
+
+        // TODO: Support up to more, but trickle at the dispatcher level.
+        if ($numbers->getTotal() > 500) {
+            throw new InvalidMessageException(
+                sprintf(
+                    'Up to 500 recipients can be used for a single message. You have somehow exceeded that limit by trying to send this to %s recipients.',
+                    \count($phoneNumbers)
+                ),
+                InvalidMessageException::E_RECIPIENTS_TOO_MANY
+            );
+        }
+
+        $this->phoneNumbers = $numbers;
     }
 }

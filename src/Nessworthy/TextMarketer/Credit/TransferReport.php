@@ -36,7 +36,7 @@ final class TransferReport
     /**
      * @return int
      */
-    public function getSourceCreditsBefore(): int
+    public function getSourceCreditsBeforeTransfer(): int
     {
         return $this->sourceCreditsBefore;
     }
@@ -44,7 +44,7 @@ final class TransferReport
     /**
      * @return int
      */
-    public function getSourceCreditsAfter(): int
+    public function getSourceCreditsAfterTransfer(): int
     {
         return $this->sourceCreditsAfter;
     }
@@ -52,7 +52,7 @@ final class TransferReport
     /**
      * @return int
      */
-    public function getTargetCreditsBefore(): int
+    public function getTargetCreditsBeforeTransfer(): int
     {
         return $this->targetCreditsBefore;
     }
@@ -60,7 +60,7 @@ final class TransferReport
     /**
      * @return int
      */
-    public function getTargetCreditsAfter(): int
+    public function getTargetCreditsAfterTransfer(): int
     {
         return $this->targetCreditsAfter;
     }
