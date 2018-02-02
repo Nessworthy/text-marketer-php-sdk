@@ -1,7 +1,7 @@
 <?php declare(strict_types=1);
 namespace Nessworthy\TextMarketer\Authentication;
 
-final class SimpleAuthentication implements Authentication
+final class Simple implements Authentication
 {
     private $userName;
     private $password;

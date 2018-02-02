@@ -20,16 +20,24 @@ composer require nessworthy\textmarketer-php-sdk
 ```php
 <?php
 
-$apiCredentials = new Nessworthy\TextMarketer\Authentication\SimpleAuthentication('api_username', 'api_password');
+$apiCredentials = new Nessworthy\TextMarketer\Authentication\Simple('api_username', 'api_password');
 
-$textMarketer = /*new Endpoint($apiCredentials);*/
+$textMarketer = new \Nessworthy\TextMarketer\Endpoint\Sandbox\Sandbox($apiCredentials);
 
-$messageCommand = new \Nessworthy\TextMarketer\Message\SendMessage(
+$messageCommand = new \Nessworthy\TextMarketer\Message\Command\SendMessage(
     'This is a test message',
     ['447777777777'],
     'Test Company Inc'
 );
 
-$deliveryReport = $textMarketer->sendMessage($messageCommand);
+$deliveryResult = $textMarketer->sendMessage($messageCommand);
+
+if ($deliveryResult->isSent()) {
+    echo 'Message sent with the ID of ' . $deliveryResult->getMessageId();
+} elseif ($deliveryResult->isQueued()) {
+    echo 'Message queued with the ID of ' . $deliveryResult->getMessageId();
+} elseif ($deliveryResult->isScheduled()) {
+    echo 'Is scheduled with the ID of ' . $deliveryResult->getScheduledId();
+}
 
 ```

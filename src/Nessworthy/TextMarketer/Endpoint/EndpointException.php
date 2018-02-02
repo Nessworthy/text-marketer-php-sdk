@@ -4,7 +4,7 @@ namespace Nessworthy\TextMarketer\Endpoint;
 
 use Nessworthy\TextMarketer\TextMarketerException;
 
-abstract class EndpointException extends TextMarketerException
+class EndpointException extends TextMarketerException
 {
     /**
      * @var array

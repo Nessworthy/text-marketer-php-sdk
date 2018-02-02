@@ -3,14 +3,14 @@
 namespace Nessworthy\TextMarketer\Tests\Authentication;
 
 use Nessworthy\TextMarketer\Authentication\InvalidAuthenticationException;
-use Nessworthy\TextMarketer\Authentication\SimpleAuthentication;
+use Nessworthy\TextMarketer\Authentication\Simple;
 use PHPUnit\Framework\TestCase;
 
 class SimpleAuthenticationTest extends TestCase
 {
     public function testAuthenticationReturnsSameCredentials()
     {
-        $authentication = new SimpleAuthentication('sean.nessworthy', 'sean.the.sheep');
+        $authentication = new Simple('sean.nessworthy', 'sean.the.sheep');
 
         $this->assertEquals('sean.nessworthy', $authentication->getUserName());
         $this->assertEquals('sean.the.sheep', $authentication->getPassword());
@@ -29,7 +29,7 @@ class SimpleAuthenticationTest extends TestCase
         $this->expectExceptionCode(InvalidAuthenticationException::E_INVALID_USERNAME);
         $this->expectExceptionMessage('Your text marketer user name should be at least 6 characters, ' . $userLength . ' given.');
 
-        new SimpleAuthentication($user, $password);
+        new Simple($user, $password);
     }
 
     /**
@@ -45,7 +45,7 @@ class SimpleAuthenticationTest extends TestCase
         $this->expectExceptionCode(InvalidAuthenticationException::E_INVALID_PASSWORD);
         $this->expectExceptionMessage('Your text marketer password should be at least 6 characters, ' . $passwordLength . ' given.');
 
-        new SimpleAuthentication($user, $password);
+        new Simple($user, $password);
     }
 
     public function fiveCharacterStringsOrLessGenerator()

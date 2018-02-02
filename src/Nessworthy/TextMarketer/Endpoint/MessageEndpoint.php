@@ -18,7 +18,7 @@ interface MessageEndpoint
      * Send an SMS message.
      * @param SendMessage $message
      * @return MessageDeliveryReport
-     * @throws SendMessageException
+     * @throws EndpointException
      */
     public function sendMessage(SendMessage $message): MessageDeliveryReport;
 
@@ -27,7 +27,7 @@ interface MessageEndpoint
      * @param SendMessage $message
      * @param \DateTimeImmutable $deliveryTime
      * @return MessageDeliveryReport
-     * @throws SendScheduledMessageException
+     * @throws EndpointException
      */
     public function sendScheduledMessage(SendMessage $message, \DateTimeImmutable $deliveryTime): MessageDeliveryReport;
 
@@ -35,7 +35,7 @@ interface MessageEndpoint
      * Delete a scheduled SMS message.
      * Note - this will fail if the message has already been sent.
      * @param string $scheduleId
-     * @throws DeleteScheduledMessageException
+     * @throws EndpointException
      */
     public function deleteScheduledMessage(string $scheduleId): void;
 }
