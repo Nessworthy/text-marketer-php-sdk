@@ -30,14 +30,20 @@ $messageCommand = new \Nessworthy\TextMarketer\Message\Command\SendMessage(
     'Test Company Inc'
 );
 
-$deliveryResult = $textMarketer->sendMessage($messageCommand);
-
-if ($deliveryResult->isSent()) {
-    echo 'Message sent with the ID of ' . $deliveryResult->getMessageId();
-} elseif ($deliveryResult->isQueued()) {
-    echo 'Message queued with the ID of ' . $deliveryResult->getMessageId();
-} elseif ($deliveryResult->isScheduled()) {
-    echo 'Is scheduled with the ID of ' . $deliveryResult->getScheduledId();
+try {
+    $deliveryResult = $textMarketer->sendMessage($messageCommand);
+    if ($deliveryResult->isSent()) {
+        echo 'Message sent with the ID of ' . $deliveryResult->getMessageId();
+    } elseif ($deliveryResult->isQueued()) {
+        echo 'Message queued with the ID of ' . $deliveryResult->getMessageId();
+    } elseif ($deliveryResult->isScheduled()) {
+        echo 'Is scheduled with the ID of ' . $deliveryResult->getScheduledId();
+    }
+} catch (\Nessworthy\TextMarketer\Endpoint\EndpointException $e) {
+    // $e->getMessage() and $e->getCode() return the first message.
+    // Or for all errors...
+    foreach ($e->getAllEndpointErrors() as $error) {
+        error_log(sprintf('TextMarketer Message Error: [%s] %s', $error->getCode(), $error->getMessage()));         
+    }
 }
-
 ```
