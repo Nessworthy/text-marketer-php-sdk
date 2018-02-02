@@ -11,14 +11,12 @@ use Nessworthy\TextMarketer\Message\Part\Validity;
 class SendMessage
 {
     private $payload;
+    /** @var PhoneNumberCollection */
     private $phoneNumbers;
     private $originator;
     private $customTag;
     private $validity;
     private $checkSTOP;
-    /**
-     * @var string
-     */
     private $txtUsEmail;
 
     /**
@@ -159,5 +157,10 @@ class SendMessage
         }
 
         $this->phoneNumbers = $numbers;
+    }
+
+    public function hasTxtUsEmail(): bool
+    {
+        return $this->txtUsEmail !== null;
     }
 }
