@@ -3,7 +3,7 @@
 namespace Nessworthy\TextMarketer\Endpoint;
 
 use Nessworthy\TextMarketer\Message\MessageDeliveryReport;
-use Nessworthy\TextMarketer\Message\Command\SendMessage;
+use Nessworthy\TextMarketer\Message\SendMessage;
 
 /**
  * Message Endpoint

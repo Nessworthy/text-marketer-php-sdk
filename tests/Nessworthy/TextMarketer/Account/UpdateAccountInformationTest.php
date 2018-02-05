@@ -1,9 +1,9 @@
 <?php declare(strict_types=1);
 
-namespace Nessworthy\TextMarketer\Tests\Account\Command;
+namespace Nessworthy\TextMarketer\Tests\Account;
 
 use Nessworthy\TextMarketer\Account\AccountInformationException;
-use Nessworthy\TextMarketer\Account\Command\UpdateAccountInformation;
+use Nessworthy\TextMarketer\Account\UpdateAccountInformation;
 use PHPUnit\Framework\TestCase;
 
 class UpdateAccountInformationTest extends TestCase

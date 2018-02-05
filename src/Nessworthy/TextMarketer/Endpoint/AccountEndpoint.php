@@ -3,8 +3,8 @@
 namespace Nessworthy\TextMarketer\Endpoint;
 
 use Nessworthy\TextMarketer\Account\AccountInformation;
-use Nessworthy\TextMarketer\Account\Command\CreateSubAccount;
-use Nessworthy\TextMarketer\Account\Command\UpdateAccountInformation;
+use Nessworthy\TextMarketer\Account\CreateSubAccount;
+use Nessworthy\TextMarketer\Account\UpdateAccountInformation;
 
 /**
  * Account Endpoint

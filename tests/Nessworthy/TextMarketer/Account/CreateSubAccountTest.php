@@ -1,8 +1,8 @@
 <?php declare(strict_types=1);
 
-namespace Nessworthy\TextMarketer\Tests\Account\Command;
+namespace Nessworthy\TextMarketer\Tests\Account;
 
-use Nessworthy\TextMarketer\Account\Command\CreateSubAccount;
+use Nessworthy\TextMarketer\Account\CreateSubAccount;
 use PHPUnit\Framework\TestCase;
 
 class CreateSubAccountTest extends TestCase

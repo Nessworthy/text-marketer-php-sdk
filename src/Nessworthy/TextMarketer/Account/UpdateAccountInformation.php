@@ -1,8 +1,6 @@
 <?php declare(strict_types=1);
 
-namespace Nessworthy\TextMarketer\Account\Command;
-
-use Nessworthy\TextMarketer\Account\AccountInformationException;
+namespace Nessworthy\TextMarketer\Account;
 
 /**
  * Class UpdateAccountInformation
@@ -11,7 +9,7 @@ use Nessworthy\TextMarketer\Account\AccountInformationException;
  *
  * Fields set as null represent fields which should not be updated.
  *
- * @package Nessworthy\TextMarketer\Account\Command
+ * @package Nessworthy\TextMarketer\Account
  */
 class UpdateAccountInformation
 {

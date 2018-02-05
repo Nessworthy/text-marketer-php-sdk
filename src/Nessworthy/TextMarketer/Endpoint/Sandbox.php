@@ -1,15 +1,11 @@
 <?php declare(strict_types=1);
 
-namespace Nessworthy\TextMarketer\Endpoint\Sandbox;
+namespace Nessworthy\TextMarketer\Endpoint;
 
 use GuzzleHttp\Client;
 use Nessworthy\TextMarketer\Authentication\Authentication;
 use Nessworthy\TextMarketer\Credit\TransferReport;
-use Nessworthy\TextMarketer\Endpoint\CreditEndpoint;
-use Nessworthy\TextMarketer\Endpoint\EndpointError;
-use Nessworthy\TextMarketer\Endpoint\EndpointException;
-use Nessworthy\TextMarketer\Endpoint\MessageEndpoint;
-use Nessworthy\TextMarketer\Message\Command\SendMessage;
+use Nessworthy\TextMarketer\Message\SendMessage;
 use Nessworthy\TextMarketer\Message\MessageDeliveryReport;
 
 class Sandbox implements MessageEndpoint, CreditEndpoint

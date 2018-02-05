@@ -1,7 +1,6 @@
 <?php declare(strict_types=1);
-namespace Nessworthy\TextMarketer\Message\Command;
+namespace Nessworthy\TextMarketer\Message;
 
-use Nessworthy\TextMarketer\Message\InvalidMessageException;
 use Nessworthy\TextMarketer\Message\Part\MessagePayload;
 use Nessworthy\TextMarketer\Message\Part\Originator;
 use Nessworthy\TextMarketer\Message\Part\PhoneNumberCollection;
