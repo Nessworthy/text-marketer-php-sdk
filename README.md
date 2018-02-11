@@ -32,7 +32,7 @@ composer require nessworthy\textmarketer-php-sdk
     * [Filtering by Report Name](#filtering-by-report-name)
     * [Filtering by Report Name and Date Range](#filtering-by-report-name-and-date-range)
     * [Filtering by Report Name and Tag](#filtering-by-report-name-and-tag)
-    * [Filtering by Report Name, Tag, and Date Range](#filtering-by-report-name--tag--and-date-range)
+    * [Filtering by Report Name, Tag, and Date Range](#filtering-by-report-name-tag-and-date-range)
 * [Account Management](#account-management)
     * [Fetching your Account Information](#fetching-your-account-information)
     * [Fetching Account Information by Account ID](#fetching-account-information-by-account-id)
