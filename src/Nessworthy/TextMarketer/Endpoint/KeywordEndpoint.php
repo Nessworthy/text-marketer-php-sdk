@@ -17,6 +17,7 @@ interface KeywordEndpoint
      * Retrieve the availability information of a given keyword.
      * @param string $keyword
      * @return KeywordAvailability
+     * @throws EndpointException
      */
     public function checkKeywordAvailability(string $keyword): KeywordAvailability;
 }

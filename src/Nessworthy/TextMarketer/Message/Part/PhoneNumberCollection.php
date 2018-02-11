@@ -44,7 +44,7 @@ final class PhoneNumberCollection
     /**
      * @return string[]
      */
-    public function getAllRecipients(): array
+    public function asArray(): array
     {
         return $this->phoneNumbers;
     }

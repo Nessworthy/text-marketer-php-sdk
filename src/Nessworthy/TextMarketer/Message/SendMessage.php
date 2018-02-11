@@ -73,7 +73,7 @@ class SendMessage
      */
     public function getMessageRecipients(): array
     {
-        return $this->phoneNumbers->getAllRecipients();
+        return $this->phoneNumbers->asArray();
     }
 
     /**

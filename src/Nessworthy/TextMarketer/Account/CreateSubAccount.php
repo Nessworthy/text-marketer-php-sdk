@@ -9,7 +9,7 @@ class CreateSubAccount
      */
     private $username;
     /**
-     * @var string
+     * @var string|null
      */
     private $password;
     /**
@@ -17,11 +17,11 @@ class CreateSubAccount
      */
     private $companyName;
     /**
-     * @var string
+     * @var string|null
      */
     private $notificationEmail;
     /**
-     * @var string
+     * @var string|null
      */
     private $notificationMobile;
     /**
@@ -35,12 +35,12 @@ class CreateSubAccount
 
     public function __construct(
         string $username,
-        string $password,
+        ?string $password = null,
         string $companyName,
-        string $notificationEmail,
-        string $notificationMobile,
+        ?string $notificationEmail = null,
+        ?string $notificationMobile = null,
         bool $overridePricing,
-        string $promoCode
+        string $promoCode = null
     ) {
         $this->username = $username;
         $this->password = $password;
@@ -54,15 +54,15 @@ class CreateSubAccount
     /**
      * @return string
      */
-    public function getUserName(): string
+    public function getAccountUserName(): string
     {
         return $this->username;
     }
 
     /**
-     * @return string
+     * @return string|null
      */
-    public function getPassword(): string
+    public function getAccountPassword(): ?string
     {
         return $this->password;
     }
@@ -76,17 +76,17 @@ class CreateSubAccount
     }
 
     /**
-     * @return string
+     * @return string|null
      */
-    public function getNotificationEmail(): string
+    public function getNotificationEmail(): ?string
     {
         return $this->notificationEmail;
     }
 
     /**
-     * @return string
+     * @return string|null
      */
-    public function getNotificationMobile(): string
+    public function getNotificationMobile(): ?string
     {
         return $this->notificationMobile;
     }
@@ -100,9 +100,9 @@ class CreateSubAccount
     }
 
     /**
-     * @return string
+     * @return string|null
      */
-    public function getPromoCode(): string
+    public function getPromoCode(): ?string
     {
         return $this->promoCode;
     }

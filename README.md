@@ -106,7 +106,7 @@ echo sprintf(
 try {
     // Send a text marketer request.
 } catch (\Nessworthy\TextMarketer\Endpoint\EndpointException $e) {
-    // $e->getMessage() and $e->getCode() return the first message.
+    // $e->getMessage() and $e->getCode() return the first message & message code.
     // Or for all errors...
     foreach ($e->getAllEndpointErrors() as $error) {
         error_log(sprintf('TextMarketer Message Error: [%s] %s', $error->getCode(), $error->getMessage()));         

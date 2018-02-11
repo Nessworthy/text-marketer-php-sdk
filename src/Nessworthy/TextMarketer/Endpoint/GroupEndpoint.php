@@ -19,6 +19,7 @@ interface GroupEndpoint
     /**
      * Retrieve the full list of groups for the account in use.
      * @return SendGroupSummaryCollection
+     * @throws EndpointException
      */
     public function getGroupsList(): SendGroupSummaryCollection;
 
@@ -27,6 +28,7 @@ interface GroupEndpoint
      * @param string $groupNameOrId
      * @param PhoneNumberCollection $numbers
      * @return AddNumbersToGroupReport
+     * @throws EndpointException
      */
     public function addNumbersToGroup(string $groupNameOrId, PhoneNumberCollection $numbers): AddNumbersToGroupReport;
 
@@ -34,6 +36,7 @@ interface GroupEndpoint
      * Create a new group.
      * @param string $groupName
      * @return SendGroup
+     * @throws EndpointException
      */
     public function createGroup(string $groupName): SendGroup;
 
@@ -41,6 +44,7 @@ interface GroupEndpoint
      * Retrieve information for a given group.
      * @param string $groupNameOrId
      * @return SendGroup
+     * @throws EndpointException
      */
     public function getGroupInformation(string $groupNameOrId): SendGroup;
 }

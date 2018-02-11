@@ -22,6 +22,7 @@ interface AccountEndpoint
      * Retrieve information for the account in use.
      * Warning - this endpoint returns passwords!
      * @return AccountInformation
+     * @throws EndpointException
      */
     public function getAccountInformation(): AccountInformation;
 
@@ -29,6 +30,7 @@ interface AccountEndpoint
      * Retrieve information for a given account or sub account.
      * @param string $accountId
      * @return AccountInformation
+     * @throws EndpointException
      */
     public function getAccountInformationForAccountId(string $accountId): AccountInformation;
 
@@ -36,6 +38,7 @@ interface AccountEndpoint
      * Update account information for the account in use.
      * @param UpdateAccountInformation $newAccountInformation
      * @return AccountInformation
+     * @throws EndpointException
      */
     public function updateAccountInformation(UpdateAccountInformation $newAccountInformation): AccountInformation;
 
@@ -44,6 +47,7 @@ interface AccountEndpoint
      * Note - This feature is disabled by default until you request Text Marketer to enable it.
      * @param CreateSubAccount $subAccountDetails
      * @return AccountInformation
+     * @throws EndpointException
      */
     public function createSubAccount(CreateSubAccount $subAccountDetails): AccountInformation;
 }

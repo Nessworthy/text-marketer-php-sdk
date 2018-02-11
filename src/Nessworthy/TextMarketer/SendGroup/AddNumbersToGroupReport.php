@@ -34,7 +34,7 @@ final class AddNumbersToGroupReport
      */
     public function getAddedNumbers(): array
     {
-        return $this->addedNumbers->getAllRecipients();
+        return $this->addedNumbers->asArray();
     }
 
     /**
@@ -50,7 +50,7 @@ final class AddNumbersToGroupReport
      */
     public function getStoppedNumbers(): array
     {
-        return $this->stoppedNumbers->getAllRecipients();
+        return $this->stoppedNumbers->asArray();
     }
 
     /**
@@ -66,7 +66,7 @@ final class AddNumbersToGroupReport
      */
     public function getDuplicateNumbers(): array
     {
-        return $this->duplicateNumbers->getAllRecipients();
+        return $this->duplicateNumbers->asArray();
     }
 
     /**

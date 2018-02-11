@@ -52,7 +52,7 @@ final class SendGroup
      */
     public function getNumbers(): array
     {
-        return $this->numbers->getAllRecipients();
+        return $this->numbers->asArray();
     }
 
     /**

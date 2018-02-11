@@ -19,8 +19,8 @@ class CreateSubAccountTest extends TestCase
             'ABCDEFG'
         );
 
-        $this->assertEquals('username', $subAccountQuery->getUserName());
-        $this->assertEquals('password', $subAccountQuery->getPassword());
+        $this->assertEquals('username', $subAccountQuery->getAccountUserName());
+        $this->assertEquals('password', $subAccountQuery->getAccountPassword());
         $this->assertEquals('My Company', $subAccountQuery->getCompanyName());
         $this->assertEquals('notification@email.com', $subAccountQuery->getNotificationEmail());
         $this->assertEquals('447777777777', $subAccountQuery->getNotificationMobile());
