@@ -117,7 +117,7 @@ $groupCollection = $textMarketer->getGroupsList();
 
 echo sprintf(
     'I have %s groups!',
-    $groupCollection->isEmpty() ? 'no' : $groupCollection->getTotal(),
+    $groupCollection->isEmpty() ? 'no' : $groupCollection->getTotal()
 );
 
 echo '<br>';

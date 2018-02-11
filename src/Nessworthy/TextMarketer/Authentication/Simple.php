@@ -13,20 +13,20 @@ final class Simple implements Authentication
      */
     public function __construct(string $userName, string $password)
     {
-        if (\strlen($userName) < 6) {
+        if (\strlen($userName) < 5) {
             throw new InvalidAuthenticationException(
                 sprintf(
-                    'Your text marketer user name should be at least 6 characters, %s given.',
+                    'Your text marketer user name should be at least 5 characters, %s given.',
                     \strlen($userName)
                 ),
                 InvalidAuthenticationException::E_INVALID_USERNAME
             );
         }
 
-        if (\strlen($password) < 6) {
+        if (\strlen($password) < 5) {
             throw new InvalidAuthenticationException(
                 sprintf(
-                    'Your text marketer password should be at least 6 characters, %s given.',
+                    'Your text marketer password should be at least 5 characters, %s given.',
                     \strlen($password)
                 ),
                 InvalidAuthenticationException::E_INVALID_PASSWORD

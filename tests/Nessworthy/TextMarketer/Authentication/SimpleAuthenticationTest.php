@@ -17,38 +17,38 @@ class SimpleAuthenticationTest extends TestCase
     }
 
     /**
-     * @dataProvider fiveCharacterStringsOrLessGenerator
+     * @dataProvider fourCharacterStringsOrLessGenerator
      * @param string $user
      */
-    public function testProvidingUserNameFiveCharactersOrLessThrowsInvalidAuthenticationException(string $user)
+    public function testProvidingUserNameFourCharactersOrLessThrowsInvalidAuthenticationException(string $user)
     {
         $password = 'sean.the.sheep';
         $userLength = \strlen($user);
 
         $this->expectException(InvalidAuthenticationException::class);
         $this->expectExceptionCode(InvalidAuthenticationException::E_INVALID_USERNAME);
-        $this->expectExceptionMessage('Your text marketer user name should be at least 6 characters, ' . $userLength . ' given.');
+        $this->expectExceptionMessage('Your text marketer user name should be at least 5 characters, ' . $userLength . ' given.');
 
         new Simple($user, $password);
     }
 
     /**
-     * @dataProvider fiveCharacterStringsOrLessGenerator
+     * @dataProvider fourCharacterStringsOrLessGenerator
      * @param string $password
      */
-    public function testProvidingPasswordFiveCharactersOrLessThrowsInvalidAuthenticationException(string $password)
+    public function testProvidingPasswordFourCharactersOrLessThrowsInvalidAuthenticationException(string $password)
     {
         $user = 'sean.the.sheep';
         $passwordLength = \strlen($password);
 
         $this->expectException(InvalidAuthenticationException::class);
         $this->expectExceptionCode(InvalidAuthenticationException::E_INVALID_PASSWORD);
-        $this->expectExceptionMessage('Your text marketer password should be at least 6 characters, ' . $passwordLength . ' given.');
+        $this->expectExceptionMessage('Your text marketer password should be at least 5 characters, ' . $passwordLength . ' given.');
 
         new Simple($user, $password);
     }
 
-    public function fiveCharacterStringsOrLessGenerator()
+    public function fourCharacterStringsOrLessGenerator()
     {
         return [
             [''],
@@ -56,7 +56,6 @@ class SimpleAuthenticationTest extends TestCase
             ['ab'],
             ['abc'],
             ['abcd'],
-            ['abcde'],
         ];
     }
 }

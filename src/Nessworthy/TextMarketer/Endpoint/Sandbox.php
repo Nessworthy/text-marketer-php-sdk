@@ -3,6 +3,7 @@
 namespace Nessworthy\TextMarketer\Endpoint;
 
 use GuzzleHttp\Client;
+use GuzzleHttp\Exception\ClientException;
 use Nessworthy\TextMarketer\Account\AccountInformation;
 use Nessworthy\TextMarketer\Account\CreateSubAccount;
 use Nessworthy\TextMarketer\Account\UpdateAccountInformation;
@@ -257,7 +258,7 @@ final class Sandbox implements MessageEndpoint, CreditEndpoint, KeywordEndpoint,
     {
         $response = $this->toDomDocument(
             $this->sendPostRequest(
-                $this->buildEndpointUri('groups', $groupNameOrId),
+                $this->buildEndpointUri('group', $groupNameOrId),
                 implode(',', $numbers->asArray())
             )
         );
@@ -303,7 +304,7 @@ final class Sandbox implements MessageEndpoint, CreditEndpoint, KeywordEndpoint,
      */
     public function createGroup(string $groupName): SendGroup
     {
-        $response = $this->toDomDocument($this->sendPutRequest($this->buildEndpointUri('groups', $groupName)));
+        $response = $this->toDomDocument($this->sendPutRequest($this->buildEndpointUri('group', $groupName)));
 
         return $this->handleGroupResponse($response);
     }
@@ -313,7 +314,7 @@ final class Sandbox implements MessageEndpoint, CreditEndpoint, KeywordEndpoint,
      */
     public function getGroupInformation(string $groupNameOrId): SendGroup
     {
-        $response = $this->toDomDocument($this->sendGetRequest($this->buildEndpointUri('groups', $groupNameOrId)));
+        $response = $this->toDomDocument($this->sendGetRequest($this->buildEndpointUri('group', $groupNameOrId)));
 
         return $this->handleGroupResponse($response);
     }
@@ -431,7 +432,7 @@ final class Sandbox implements MessageEndpoint, CreditEndpoint, KeywordEndpoint,
         /** @var \DOMNode $error */
         foreach ($errors as $error) {
             $errorList[] = new EndpointError(
-                (int) $error->attributes->getNamedItem('code')->textContent,
+                (int) $error->attributes->getNamedItem('code'),
                 $error->textContent
             );
         }
@@ -467,7 +468,11 @@ final class Sandbox implements MessageEndpoint, CreditEndpoint, KeywordEndpoint,
 
     private function sendSimpleHttpRequest(string $method, string $endpoint, array $options = []): string
     {
-        return $this->httpClient->{$method}($method, $endpoint, $options);
+        try {
+            return $this->httpClient->request($method, $endpoint, $options)->getBody()->getContents();
+        } catch (ClientException $e) {
+            return $e->getResponse()->getBody()->getContents();
+        }
     }
 
     /**

@@ -42,9 +42,9 @@ interface GroupEndpoint
 
     /**
      * Retrieve information for a given group.
-     * @param string $groupNameOrId
+     * @param string $groupName
      * @return SendGroup
      * @throws EndpointException
      */
-    public function getGroupInformation(string $groupNameOrId): SendGroup;
+    public function getGroupInformation(string $groupName): SendGroup;
 }
