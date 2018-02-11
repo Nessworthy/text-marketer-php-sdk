@@ -15,7 +15,32 @@ composer require nessworthy\textmarketer-php-sdk
 
 ## Example Usage
 
-### Setting up:
+* [Setting Up](#setting-up)
+* [Creating and Sending SMS Messages](#creating-and-sending-sms-messages)
+    * [Scheduling Messages](#scheduling-messages)
+    * [Deleting Scheduled Messages](#deleting-scheduled-messages)
+* [Handling and Transferring Credits](#handling-and-transferring-credits)
+    * [Fetching your Current Credits](#fetching-your-current-credits)
+    * [Transferring Credits by Account ID or Credentials](#transferring-credits-by-account-id-or-credentials)
+* [Keyword Availability](#keyword-availability)
+* [Group Management](#group-management)
+    * [Fetching your List of Groups](#fetching-your-list-of-groups)
+    * [Adding One or More Numbers to a Group](#adding-one-or-more-numbers-to-a-group)
+    * [Creating a New Group](#creating-a-new-group)
+    * [Fetching Information for an Existing Group](#fetching-information-for-an-existing-group)
+* [Delivery Reports](#delivery-reports)
+    * [Filtering by Report Name](#filtering-by-report-name)
+    * [Filtering by Report Name and Date Range](#filtering-by-report-name-and-date-range)
+    * [Filtering by Report Name and Tag](#filtering-by-report-name-and-tag)
+    * [Filtering by Report Name, Tag, and Date Range](#filtering-by-report-name--tag--and-date-range)
+* [Account Management](#account-management)
+    * [Fetching your Account Information](#fetching-your-account-information)
+    * [Fetching Account Information by Account ID](#fetching-account-information-by-account-id)
+    * [Updating Your Account Information](#updating-your-account-information)
+    * [Creating a New Sub-Account](#creating-a-new-sub-account)
+* [Exception and Error Handling](#exception-and-error-handling)
+
+### Setting up
 
 ```php
 $apiCredentials = new \Nessworthy\TextMarketer\Authentication\Simple('api_username', 'api_password');
@@ -24,7 +49,7 @@ $apiCredentials = new \Nessworthy\TextMarketer\Authentication\Simple('api_userna
 $textMarketer = new \Nessworthy\TextMarketer\Endpoint\Sandbox($apiCredentials);
 ```
 
-### Creating & Sending SMS Messages
+### Creating and Sending SMS Messages
 
 ```php
 $messageCommand = new \Nessworthy\TextMarketer\Message\SendMessage(
@@ -63,7 +88,7 @@ $deliveryResult = $textMarketer->sendScheduledMessage($messageCommand, $schedule
 $textMarketer->deleteScheduledMessage($scheduledMessageId);
 ```
 
-### Handling & Transferring Credits ###
+### Handling and Transferring Credits ###
 
 #### Fetching your Current Credits #### 
 
@@ -71,7 +96,7 @@ $textMarketer->deleteScheduledMessage($scheduledMessageId);
 echo sprintf('I have %d remaining credits!', $textMarketer->getCreditCount());
 ```
 
-#### Transferring Credits (by account ID or credentials)
+#### Transferring Credits by Account ID or Credentials
 
 ```php
 $transferResult = $textMarketer->transferCreditsToAccountById(100, $someAccountId);
@@ -110,7 +135,7 @@ echo sprintf(
 
 ### Group Management ###
 
-#### Fetch Your List of Groups ####
+#### Fetching Your List of Groups ####
 
 ```php
 $groupCollection = $textMarketer->getGroupsList();
@@ -135,7 +160,7 @@ foreach ($groupCollection->asArray() as $groupSummary) {
 
 ```
 
-#### Add One or More Numbers to a Group ####
+#### Adding One or More Numbers to a Group ####
 
 ```php
 $numbersToAdd = new Nessworthy\TextMarketer\Message\Part\PhoneNumberCollection([
@@ -161,7 +186,7 @@ echo 'Duplicated numbers: ' . $textMarketer->getTotalDuplicateNumbers();
 echo 'Numbers added:<br>' . implode('<br>',$textMarketer->getDuplicateNumbers(); 
 ```
 
-#### Create a New Group ####
+#### Creating a New Group ####
 
 ```php
 $group = $textMarketer->createGroup('mygroup');
@@ -176,7 +201,7 @@ echo sprintf(
 // You can also use getNumberCount() and getNumbers(), which will return 0 and an empty array, respectively.
 ```
 
-#### Fetch Information for an Existing Group
+#### Fetching Information for an Existing Group ####
 
 ```php
 $group = $textMarketer->getGroupInformation('mygroup');
@@ -222,13 +247,13 @@ foreach ($reportCollection->asArray() as $report) {
 
 All report-related calls return the results in the same format as above.
 
-#### Filter by Report Name ####
+#### Filtering by Report Name ####
 
 ```php
 $reportCollection = $textMarketer->getDeliveryReportListByName('ReportName');
 ```
 
-#### Filter By Report Name & Date Range ####
+#### Filtering By Report Name and Date Range ####
 
 ```php
 $from = new DateTimeImmutable();
@@ -237,14 +262,14 @@ $dateRange = new \Nessworthy\TextMarketer\DateRange($from, $to);
 $reportCollection = $textMarketer->getDeliveryReportListByNameAndDateRange('ReportName', $dateRange);
 ```
 
-#### Filter by Report Name & Tag ####
+#### Filtering by Report Name and Tag ####
 
 ```php
 $from = new DateTimeImmutable();
 $reportCollection = $textMarketer->getDeliveryReportListByNameAndTag('ReportName', 'mytag');
 ```
 
-#### Filter by Report Name, Tag, & Date Range ####  
+#### Filtering by Report Name, Tag, and Date Range ####  
 
 ```php
 $from = new DateTimeImmutable();
@@ -258,7 +283,7 @@ $reportCollection = $textMarketer->getDeliveryReportListByNameTagAndDateRange('R
 All methods here return an instance of `Nessworthy\TextMarketer\Account\AccountInformation`.
 These objects contain both account and API credentials - it would be wise to not cache or otherwise save them as-is!
 
-#### Fetch Your Account Information ####
+#### Fetching Your Account Information ####
 
 ```php
 $accountInformation = $textMarketer->getAccountInformation();
@@ -275,7 +300,7 @@ echo '<br>API Username: ' . $accountInformation->getApiUserName();
 echo '<br>API Password: ' . $accountInformation->getApiPassword();
 ``` 
 
-#### Fetch Account Information by Account ID ####
+#### Fetching Account Information by Account ID ####
 
 Note: The account ID should be typed as a string.
 
@@ -283,7 +308,7 @@ Note: The account ID should be typed as a string.
 $accountInformation = $textMarketer->getAccountInformationForAccountId($accountId);
 ```
 
-#### Update Your Account Information ####
+#### Updating Your Account Information ####
 
 Note: There's no way to update another account's information - you must use their credentials.
 
@@ -306,7 +331,7 @@ $newAccountDetails = new Nessworthy\TextMarketer\Account\UpdateAccountInformatio
 $updatedAccountInformation = $textMarketer->updateAccountInformation($newAccountDetails);
 ```
 
-#### Create a New Sub-Account ####
+#### Creating a New Sub-Account ####
 
 Note: Creating new account is disabled by default - you will need to contact TextMarketer to enable this.
 Like updating your account, you must at least provide a notification email address OR a notification mobile number
@@ -326,7 +351,7 @@ $subAccount = new Nessworthy\TextMarketer\Account\CreateSubAccount(
 ```
 
 
-### Exception / Error Handling ###
+### Exception and Error Handling ###
 
 ```php
 // All exceptions extend \Nessworthy\TextMarketer\TextMarketerException.
