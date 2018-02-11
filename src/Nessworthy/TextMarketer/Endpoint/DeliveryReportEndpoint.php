@@ -17,6 +17,7 @@ interface DeliveryReportEndpoint
     /**
      * Retrieve the full list of delivery reports available for the account in use.
      * @return DeliveryReportCollection
+     * @throws EndpointException
      */
     public function getDeliveryReportList(): DeliveryReportCollection;
 
@@ -24,6 +25,7 @@ interface DeliveryReportEndpoint
      * Retrieve a filtered list of reports by name.
      * @param string $reportName
      * @return DeliveryReportCollection
+     * @throws EndpointException
      */
     public function getDeliveryReportListByName(string $reportName): DeliveryReportCollection;
 
@@ -32,6 +34,7 @@ interface DeliveryReportEndpoint
      * @param string $reportName
      * @param DateRange $createdBetween
      * @return DeliveryReportCollection
+     * @throws EndpointException
      */
     public function getDeliveryReportListByNameAndDateRange(string $reportName, DateRange $createdBetween): DeliveryReportCollection;
 
@@ -40,6 +43,7 @@ interface DeliveryReportEndpoint
      * @param string $reportName
      * @param string $tag
      * @return DeliveryReportCollection
+     * @throws EndpointException
      */
     public function getDeliveryReportListByNameAndTag(string $reportName, string $tag): DeliveryReportCollection;
 
@@ -49,6 +53,7 @@ interface DeliveryReportEndpoint
      * @param string $tag
      * @param DateRange $createdBetween
      * @return DeliveryReportCollection
+     * @throws EndpointException
      */
     public function getDeliveryReportListByNameTagAndDateRange(string $reportName, string $tag, DateRange $createdBetween): DeliveryReportCollection;
 }

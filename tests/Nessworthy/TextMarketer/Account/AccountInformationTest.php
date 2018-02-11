@@ -23,11 +23,11 @@ class AccountInformationTest extends TestCase
             'ui.user.password'
         );
 
-        $this->assertEquals('12345abcdefghijklmnop', $accountInformation->getAccountId());
+        $this->assertEquals('12345abcdefghijklmnop', $accountInformation->getId());
         $this->assertEquals('api.username', $accountInformation->getApiUserName());
         $this->assertEquals('api.password', $accountInformation->getApiPassword());
         $this->assertEquals('My Company', $accountInformation->getCompanyName());
-        $this->assertEquals($accountCreation, $accountInformation->getAccountCreatedDate());
+        $this->assertEquals($accountCreation, $accountInformation->getCreatedDate());
         $this->assertEquals(1001, $accountInformation->getRemainingCredits());
         $this->assertEquals('notification@email.com', $accountInformation->getNotificationEmail());
         $this->assertEquals('447777777777', $accountInformation->getNotificationMobile());

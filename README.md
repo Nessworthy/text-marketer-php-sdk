@@ -255,6 +255,77 @@ $reportCollection = $textMarketer->getDeliveryReportListByNameTagAndDateRange('R
 
 ### Account Management ###
 
+All methods here return an instance of `Nessworthy\TextMarketer\Account\AccountInformation`.
+These objects contain both account and API credentials - it would be wise to not cache or otherwise save them as-is!
+
+#### Fetch Your Account Information ####
+
+```php
+$accountInformation = $textMarketer->getAccountInformation();
+
+echo 'Account ID: ' . $accountInformation->getId();
+echo '<br>Company Name: ' . $accountInformation->getCompanyName();
+echo '<br>Account Created At: ' . $accountInformation->getCreatedDate()->format('d/m/Y H:i:s');
+echo '<br>Remaining Credits: ' . $accountInformation->getRemainingCredits();
+echo '<br>Notification Email: ' . $accountInformation->getNotificationEmail();
+echo '<br>Notification Mobile Number: ' . $accountInformation->getNotificationMobile();
+echo '<br>Account Username: ' . $accountInformation->getUiUserName();
+echo '<br>Account Password: ' . $accountInformation->getUiPassword();
+echo '<br>API Username: ' . $accountInformation->getApiUserName();
+echo '<br>API Password: ' . $accountInformation->getApiPassword();
+``` 
+
+#### Fetch Account Information by Account ID ####
+
+Note: The account ID should be typed as a string.
+
+```php
+$accountInformation = $textMarketer->getAccountInformationForAccountId($accountId);
+```
+
+#### Update Your Account Information ####
+
+Note: There's no way to update another account's information - you must use their credentials.
+
+All of the fields for `UpdateAccountInformation` are optional - pass `null` when you don't
+want to change a particular field.
+
+Certain restrictions apply when updating your account information. [See here for what you can use](https://wiki.textmarketer.co.uk/display/DevDoc/account+POST+method).
+
+```php
+$newAccountDetails = new Nessworthy\TextMarketer\Account\UpdateAccountInformation(
+    'uiusername',               // The new UI Username.
+    'uipassword',               // The new UI Password.
+    'apiusername',              // The new API Username.
+    'apipassword',              // The new API Password.
+    'Company Name',             // The new company name.
+    'notification@email.com',   // The new notification email address.
+    '447000000000',             // The new notification mobile number.
+);
+
+$updatedAccountInformation = $textMarketer->updateAccountInformation($newAccountDetails);
+```
+
+#### Create a New Sub-Account ####
+
+Note: Creating new account is disabled by default - you will need to contact TextMarketer to enable this.
+Like updating your account, you must at least provide a notification email address OR a notification mobile number
+
+These fields are subject to the same restrictions as that when updating you account information.
+
+```php
+$subAccount = new Nessworthy\TextMarketer\Account\CreateSubAccount(
+    'uiusername',              // The new account's username
+    'uipassword',              // Optional: The new account's password. If null is given, a random password will be generated.
+    'Company Name',            // The new account's company name.
+    'notification@email.com',  // Optional: The new account's notification email address.
+    '447000000000',            // Optional: The new account's notification mobile number.
+    false,                     // Whether to use the same pricing as the parent account.
+    'PROMOCODE'                // Optional: A promo code for the account if you have one.
+);
+```
+
+
 ### Exception / Error Handling ###
 
 ```php

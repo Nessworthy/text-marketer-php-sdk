@@ -8,6 +8,9 @@ use Nessworthy\TextMarketer\Account\CreateSubAccount;
 use Nessworthy\TextMarketer\Account\UpdateAccountInformation;
 use Nessworthy\TextMarketer\Authentication\Authentication;
 use Nessworthy\TextMarketer\Credit\TransferReport;
+use Nessworthy\TextMarketer\DeliveryReport\DateRange;
+use Nessworthy\TextMarketer\DeliveryReport\DeliveryReport;
+use Nessworthy\TextMarketer\DeliveryReport\DeliveryReportCollection;
 use Nessworthy\TextMarketer\Keyword\KeywordAvailability;
 use Nessworthy\TextMarketer\Message\InvalidMessageException;
 use Nessworthy\TextMarketer\Message\Part\PhoneNumberCollection;
@@ -18,7 +21,7 @@ use Nessworthy\TextMarketer\SendGroup\SendGroup;
 use Nessworthy\TextMarketer\SendGroup\SendGroupSummary;
 use Nessworthy\TextMarketer\SendGroup\SendGroupSummaryCollection;
 
-final class Sandbox implements MessageEndpoint, CreditEndpoint, KeywordEndpoint, AccountEndpoint, GroupEndpoint
+final class Sandbox implements MessageEndpoint, CreditEndpoint, KeywordEndpoint, AccountEndpoint, GroupEndpoint, DeliveryReportEndpoint
 {
     /**
      * @var Client
@@ -315,6 +318,77 @@ final class Sandbox implements MessageEndpoint, CreditEndpoint, KeywordEndpoint,
         return $this->handleGroupResponse($response);
     }
 
+    /**
+     * @inheritDoc
+     */
+    public function getDeliveryReportList(): DeliveryReportCollection
+    {
+        $response = $this->toDomDocument($this->sendGetRequest($this->buildEndpointUri('deliveryReport')));
+
+        return $this->handleDeliveryReportResponse($response);
+    }
+
+    /**
+     * @inheritDoc
+     */
+    public function getDeliveryReportListByName(string $reportName): DeliveryReportCollection
+    {
+        $response = $this->toDomDocument($this->sendGetRequest($this->buildEndpointUri(
+            'deliveryReport',
+            $reportName
+        )));
+
+        return $this->handleDeliveryReportResponse($response);
+    }
+
+    /**
+     * @inheritDoc
+     */
+    public function getDeliveryReportListByNameAndDateRange(string $reportName, DateRange $createdBetween): DeliveryReportCollection
+    {
+        $response = $this->toDomDocument($this->sendGetRequest($this->buildEndpointUri(
+            'deliveryReport',
+            $reportName,
+            $createdBetween->getFrom()->format('c'),
+            $createdBetween->getTo()->format('c')
+        )));
+
+        return $this->handleDeliveryReportResponse($response);
+    }
+
+    /**
+     * @inheritDoc
+     */
+    public function getDeliveryReportListByNameAndTag(string $reportName, string $tag): DeliveryReportCollection
+    {
+        $response = $this->toDomDocument($this->sendGetRequest($this->buildEndpointUri(
+            'deliveryReport',
+            $reportName,
+            'custom',
+            $tag
+        )));
+
+        return $this->handleDeliveryReportResponse($response);
+    }
+
+    /**
+     * @inheritDoc
+     */
+    public function getDeliveryReportListByNameTagAndDateRange(string $reportName, string $tag, DateRange $createdBetween): DeliveryReportCollection
+    {
+        $response = $this->toDomDocument($this->sendGetRequest($this->buildEndpointUri(
+            'deliveryReport',
+            $reportName,
+            'custom',
+            $tag,
+            $createdBetween->getFrom()->format('c'),
+            $createdBetween->getTo()->format('c')
+        )));
+
+        return $this->handleDeliveryReportResponse($response);
+    }
+
+
     private function buildEndpointUri(string ...$components): string
     {
         return 'http://sandbox.textmarketer.biz/services/rest/'
@@ -529,5 +603,31 @@ final class Sandbox implements MessageEndpoint, CreditEndpoint, KeywordEndpoint,
         } catch (InvalidMessageException $e) {
             throw new EndpointException(new EndpointError(-1, 'Could not parse returned numbers: '  . $e->getMessage()));
         }
+    }
+
+    /**
+     * @param \DOMDocument $response
+     * @return DeliveryReportCollection
+     * @throws EndpointException
+     */
+    private function handleDeliveryReportResponse(\DOMDocument $response): DeliveryReportCollection
+    {
+        $this->handleAnyErrors($response);
+
+        $reportParentElement = $response->getElementsByTagName('reports')->item(0);
+
+        $reportElements = $reportParentElement->getElementsByTagName('report');
+        $reports = [];
+
+        /** @var \DOMNode $reportElement */
+        foreach ($reportElements as $reportElement) {
+            $reports[] = new DeliveryReport(
+                $reportElement->attributes->getNamedItem('name')->textContent,
+                new \DateTimeImmutable($reportElement->attributes->getNamedItem('last_updated')->textContent),
+                $reportElement->attributes->getNamedItem('extension')->textContent
+            );
+        }
+
+        return new DeliveryReportCollection(...$reports);
     }
 }

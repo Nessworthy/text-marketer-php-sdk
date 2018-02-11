@@ -73,7 +73,7 @@ final class AccountInformation
     /**
      * @return string
      */
-    public function getAccountId(): string
+    public function getId(): string
     {
         return $this->accountId;
     }
@@ -105,7 +105,7 @@ final class AccountInformation
     /**
      * @return \DateTimeImmutable
      */
-    public function getAccountCreatedDate(): \DateTimeImmutable
+    public function getCreatedDate(): \DateTimeImmutable
     {
         return $this->accountCreatedDate;
     }
