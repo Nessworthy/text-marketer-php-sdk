@@ -9,14 +9,14 @@ final class DeliveryReportCollection
     private $reports;
     private $total;
 
-    public function __construct(MessageDeliveryReport ...$reports)
+    public function __construct(DeliveryReport ...$reports)
     {
         $this->reports = $reports;
         $this->total = \count($reports);
     }
 
     /**
-     * @return MessageDeliveryReport[]
+     * @return DeliveryReport[]
      */
     public function asArray(): array
     {

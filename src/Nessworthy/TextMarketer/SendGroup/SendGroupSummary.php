@@ -48,7 +48,7 @@ final class SendGroupSummary
     /**
      * @return int
      */
-    public function getNumbers(): int
+    public function getNumberCount(): int
     {
         return $this->numbers;
     }
