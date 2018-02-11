@@ -38,9 +38,6 @@ $messageCommand = new \Nessworthy\TextMarketer\Message\SendMessage(
 );
 
 $deliveryResult = $textMarketer->sendMessage($messageCommand);
-// Or to schedule a message:
-// $scheduledDate = (new DateTimeImmutable)->modify('+1 month');
-// $deliveryResult = $textMarketer->sendScheduledMessage($messageCommand, $scheduledDate); 
 
 if ($deliveryResult->isSent()) {
     echo 'Message sent with the ID of ' . $deliveryResult->getMessageId();
@@ -49,29 +46,47 @@ if ($deliveryResult->isSent()) {
 } elseif ($deliveryResult->isScheduled()) {
     echo 'Is scheduled with the ID of ' . $deliveryResult->getScheduledId();
 }
+```
 
-// You can also delete scheduled messages using:
-// $textMarketer->deleteScheduledMessage($scheduledMessageId);
+#### Scheduling Messages
+
+```php
+$scheduledDate = (new DateTimeImmutable)->modify('+1 month');
+$deliveryResult = $textMarketer->sendScheduledMessage($messageCommand, $scheduledDate);
+```
+
+#### Deleting Scheduled Messages
+
+```php
+// Scheduled message ID can be found from the delivery result for scheduled messages:
+// $scheduledMessageId = $deliveryResult->getScheduledId();
+$textMarketer->deleteScheduledMessage($scheduledMessageId);
 ```
 
 ### Handling & Transferring Credits ###
 
-```php
-// Retrieving your credit amount:
-echo sprintf('I have %d remaining credits!', $textMarketer->getCreditCount());
+#### Fetching your Current Credits #### 
 
-// Transferring credits:
+```php
+echo sprintf('I have %d remaining credits!', $textMarketer->getCreditCount());
+```
+
+#### Transferring Credits (by account ID or credentials)
+
+```php
 $transferResult = $textMarketer->transferCreditsToAccountById(100, $someAccountId);
+
 // Or by credentials:
-// $destinationCredentials = new \Nessworthy\TextMarketer\Authentication\Simple('username', 'password'));
-// $transferResult = $textMarketer->transferCreditsToAccountByCredentials(100, $destinationCredentials);
+
+$destinationCredentials = new \Nessworthy\TextMarketer\Authentication\Simple('username', 'password'));
+$transferResult = $textMarketer->transferCreditsToAccountByCredentials(100, $destinationCredentials);
 
 echo sprintf(
     'I had %d credits. After transferring, I now have %d!',
     $transferResult->getSourceCreditsBeforeTransfer(),
     $transferResult->getSourceCreditsAfterTransfer()
 );
-
+echo '<br>';
 echo sprintf(
     'The target account had %d credits. After transferring, it now has %d!',
     $transferResult->getTargetCreditsBeforeTransfer(),
@@ -95,7 +110,148 @@ echo sprintf(
 
 ### Group Management ###
 
+#### Fetch Your List of Groups ####
+
+```php
+$groupCollection = $textMarketer->getGroupsList();
+
+echo sprintf(
+    'I have %s groups!',
+    $groupCollection->isEmpty() ? 'no' : $groupCollection->getTotal(),
+);
+
+echo '<br>';
+echo 'Here is a summary of each group:';
+foreach ($groupCollection->asArray() as $groupSummary) {
+    echo sprintf(
+        'Group name: %s (ID: %d) has %s numbers. It %s a stop group!',
+        $groupSummary->getName(),
+        $groupSummary->getId(),
+        $groupSummary->getNumberCount(),
+        $groupSummary->isStopGroup() ? 'IS' : 'IS NOT'
+    );
+    echo '<br/>';
+}
+
+```
+
+#### Add One or More Numbers to a Group ####
+
+```php
+$numbersToAdd = new Nessworthy\TextMarketer\Message\Part\PhoneNumberCollection([
+    '44700000000',
+    '44700000001',
+    '44700000002',
+]);
+
+$result = $textMarketer->addNumbersToGroup('MyGroupNameOrID', $numbersToAdd);
+
+// Of the numbers - which ones were actually added to the list.
+echo 'Added numbers: ' . $textMarketer->getTotalAddedNumbers();
+echo 'Numbers added:<br>' . implode('<br>',$textMarketer->getAddedNumbers();
+echo '<br>';
+
+// Of the numbers - which ones were not added because they were on a STOP list.
+echo 'Stopped numbers: ' . $textMarketer->getTotalStoppedNumbers();
+echo 'Numbers added:<br>' . implode('<br>',$textMarketer->getStoppedNumbers();
+echo '<br>';
+
+// Of the numbers - which ones were not added because they were already on it.
+echo 'Duplicated numbers: ' . $textMarketer->getTotalDuplicateNumbers();
+echo 'Numbers added:<br>' . implode('<br>',$textMarketer->getDuplicateNumbers(); 
+```
+
+#### Create a New Group ####
+
+```php
+$group = $textMarketer->createGroup('mygroup');
+
+echo sprintf(
+    'A new group was created by the name "%s" with an assigned ID of "%d"! The group %s a stop group.',
+    $group->getName(),
+    $group->getId(),
+    $group->isStopGroup() ? 'IS' : 'IS NOT'
+);
+
+// You can also use getNumberCount() and getNumbers(), which will return 0 and an empty array, respectively.
+```
+
+#### Fetch Information for an Existing Group
+
+```php
+$group = $textMarketer->getGroupInformation('mygroup');
+
+echo sprintf(
+    'The group is called "%s" with an assigned ID of "%d"! The group %s a stop group.',
+    $group->getName(),
+    $group->getId(),
+    $group->isStopGroup() ? 'IS' : 'IS NOT'
+);
+
+echo '<br/>';
+
+echo sprintf(
+    'The group has %d numbers. Here they are:<br>%s',
+    $group->getNumberCount(),
+    implode('<br>', $group->getNumbers())
+);
+``` 
+
 ### Delivery Reports ###
+
+```php
+
+$reportCollection = $textMarketer->getDeliveryReportList();
+
+echo sprintf(
+    'I have %s reports in total!',
+    $reportCollection->isEmpty() ? 'no' : $reportCollection->getTotal()
+);
+
+foreach ($reportCollection->asArray() as $report) {
+    echo '<br>';
+    echo sprintf(
+        'Report %s (last updated: %s) has extension %s.',
+        $report->getName(),
+        $report->getLastUpdated->format('d-m-Y H:i:s'),
+        $report->getExtension()
+    );
+}
+
+```
+
+All report-related calls return the results in the same format as above.
+
+#### Filter by Report Name ####
+
+```php
+$reportCollection = $textMarketer->getDeliveryReportListByName('ReportName');
+```
+
+#### Filter By Report Name & Date Range ####
+
+```php
+$from = new DateTimeImmutable();
+$to = $from->modify('-1 week');
+$dateRange = new \Nessworthy\TextMarketer\DateRange($from, $to);
+$reportCollection = $textMarketer->getDeliveryReportListByNameAndDateRange('ReportName', $dateRange);
+```
+
+#### Filter by Report Name & Tag ####
+
+```php
+$from = new DateTimeImmutable();
+$reportCollection = $textMarketer->getDeliveryReportListByNameAndTag('ReportName', 'mytag');
+```
+
+#### Filter by Report Name, Tag, & Date Range ####  
+
+```php
+$from = new DateTimeImmutable();
+$to = $from->modify('-1 week');
+$dateRange = new \Nessworthy\TextMarketer\DateRange($from, $to);
+$reportCollection = $textMarketer->getDeliveryReportListByNameTagAndDateRange('ReportName', 'mytag', $dateRange);
+```
 
 ### Account Management ###
 
