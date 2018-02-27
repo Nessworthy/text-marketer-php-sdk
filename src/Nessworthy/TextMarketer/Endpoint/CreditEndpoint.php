@@ -2,7 +2,7 @@
 
 namespace Nessworthy\TextMarketer\Endpoint;
 
-use Nessworthy\TextMarketer\Authentication\Authentication;
+use Nessworthy\TextMarketer\Authentication;
 use Nessworthy\TextMarketer\Credit\TransferReport;
 
 /**

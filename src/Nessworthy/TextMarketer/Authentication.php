@@ -1,5 +1,5 @@
 <?php declare(strict_types=1);
-namespace Nessworthy\TextMarketer\Authentication;
+namespace Nessworthy\TextMarketer;
 
 /**
  * Interface Authentication

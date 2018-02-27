@@ -3,11 +3,12 @@
 namespace Nessworthy\TextMarketer\Endpoint;
 
 use GuzzleHttp\Client;
+use GuzzleHttp\ClientInterface;
 use GuzzleHttp\Exception\ClientException;
 use Nessworthy\TextMarketer\Account\AccountInformation;
 use Nessworthy\TextMarketer\Account\CreateSubAccount;
 use Nessworthy\TextMarketer\Account\UpdateAccountInformation;
-use Nessworthy\TextMarketer\Authentication\Authentication;
+use Nessworthy\TextMarketer\Authentication;
 use Nessworthy\TextMarketer\Credit\TransferReport;
 use Nessworthy\TextMarketer\DeliveryReport\DateRange;
 use Nessworthy\TextMarketer\DeliveryReport\DeliveryReport;
@@ -22,8 +23,11 @@ use Nessworthy\TextMarketer\SendGroup\SendGroup;
 use Nessworthy\TextMarketer\SendGroup\SendGroupSummary;
 use Nessworthy\TextMarketer\SendGroup\SendGroupSummaryCollection;
 
-final class Sandbox implements MessageEndpoint, CreditEndpoint, KeywordEndpoint, AccountEndpoint, GroupEndpoint, DeliveryReportEndpoint
+final class TextMarketer implements MessageEndpoint, CreditEndpoint, KeywordEndpoint, AccountEndpoint, GroupEndpoint, DeliveryReportEndpoint
 {
+    public const ENDPOINT_SANDBOX = 'http://sandbox.textmarketer.biz/services/rest/';
+    public const ENDPOINT_PRODUCTION = 'https://api.textmarketer.co.uk/services/rest/';
+
     /**
      * @var Client
      */
@@ -32,15 +36,29 @@ final class Sandbox implements MessageEndpoint, CreditEndpoint, KeywordEndpoint,
      * @var Authentication
      */
     private $authentication;
+    /**
+     * @var string
+     */
+    private $endpoint;
 
-    public function __construct(Authentication $authentication, Client $httpClient = null)
-    {
+    /**
+     * TextMarketer constructor.
+     * @param Authentication $authentication The authentication which holds the current account's API credentials.
+     * @param string $endpoint The endpoint URI as a string. Defaults to production / live.
+     * @param ClientInterface|null $httpClient The HTTP dispatcher and handler. Defaults to a new instance of GuzzleHTTP's Client.
+     */
+    public function __construct(
+        Authentication $authentication,
+        string $endpoint = self::ENDPOINT_PRODUCTION,
+        ClientInterface $httpClient = null
+    ) {
         if ($httpClient === null) {
             $httpClient = new Client();
         }
 
         $this->httpClient = $httpClient;
         $this->authentication = $authentication;
+        $this->endpoint = $endpoint;
     }
 
     /**
@@ -392,13 +410,17 @@ final class Sandbox implements MessageEndpoint, CreditEndpoint, KeywordEndpoint,
 
     private function buildEndpointUri(string ...$components): string
     {
-        return 'http://sandbox.textmarketer.biz/services/rest/'
-            . implode(
-                '/', array_map(
+        return sprintf(
+            '%s%s',
+            $this->endpoint,
+            implode(
+                '/',
+                array_map(
                     'urlencode',
                     $components
                 )
-            );
+            )
+        );
     }
 
     private function buildSendMessageRequestParameters(SendMessage $message): array

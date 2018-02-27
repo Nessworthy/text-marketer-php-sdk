@@ -1,6 +1,6 @@
-# Text Marketer SDK
+# Text Marketer PHP SDK
 
-An unofficial library-in-progress to assist with text marketer operations.
+An unofficial library-in-progress to assist with text marketer API interactions.
 
 ## Requirements
 
@@ -45,9 +45,18 @@ composer require nessworthy\textmarketer-php-sdk
 ```php
 $apiCredentials = new \Nessworthy\TextMarketer\Authentication\Simple('api_username', 'api_password');
 
-// Sandbox is TextMarketer's sandbox environment for testing.
-$textMarketer = new \Nessworthy\TextMarketer\Endpoint\Sandbox($apiCredentials);
+$textMarketer = new \Nessworthy\TextMarketer\TextMarketer($apiCredentials);
 ```
+
+#### Parameters
+
+* Credentials - An implementation of `\Nessworthy\TextMarketer\Authentication`
+* Endpoint (optional) - The text marketer endpoint to use when sending out messages. Should be one of:
+    * `\Nessworthy\TextMarketer\TextMarketer::ENDPOINT_PRODUCTION` (default)
+    * `\Nessworthy\TextMarketer\TextMarketer::ENDPOINT_SANDBOX`
+* HTTP Client (optional) - The HTTP client to send requests out.
+    * Expects an implementation of  `GuzzleHttp\ClientInterface`
+    * By default, an instance of `GuzzleHttp\Client` is used.
 
 ### Creating and Sending SMS Messages
 
