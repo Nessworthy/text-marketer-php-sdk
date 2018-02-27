@@ -27,10 +27,10 @@ final class PhoneNumberCollection
                     InvalidMessageException::E_RECIPIENTS_INVALID
                 );
             }
-            if (!ctype_digit($phoneNumber)) {
+            if (!preg_match('#^\+?\d+$#', $phoneNumber)) {
                 throw new InvalidMessageException(
                     sprintf(
-                    'Phone numbers must only contain numbers. The number at position %d contained more than that.',
+                    'Phone numbers must only contain numbers with an optional prefix of +. The number at position %d contained more than that.',
                         $index
                     ),
                     InvalidMessageException::E_RECIPIENTS_INVALID

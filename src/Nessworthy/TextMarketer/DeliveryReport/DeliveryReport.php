@@ -2,7 +2,7 @@
 
 namespace Nessworthy\TextMarketer\DeliveryReport;
 
-final class DeliveryReport
+class DeliveryReport
 {
     /**
      * @var string

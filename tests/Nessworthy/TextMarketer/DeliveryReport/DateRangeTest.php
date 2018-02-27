@@ -1,11 +1,4 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: Sean.Nessworthy
- * Date: 02/02/2018
- * Time: 13:49
- */
-
 namespace DeliveryReport;
 
 use Nessworthy\TextMarketer\DeliveryReport\DateRange;

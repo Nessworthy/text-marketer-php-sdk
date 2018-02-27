@@ -1,11 +1,4 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: Sean.Nessworthy
- * Date: 02/02/2018
- * Time: 13:41
- */
-
 namespace Credit;
 
 use Nessworthy\TextMarketer\Credit\TransferReport;
