@@ -1,4 +1,4 @@
-# Text Marketer PHP SDK
+# Text Marketer PHP SDK [![Build Status](https://travis-ci.org/Nessworthy/text-marketer-php-sdk.svg?branch=master)](https://travis-ci.org/Nessworthy/text-marketer-php-sdk)
 
 An unofficial library-in-progress to assist with text marketer API interactions.
 
