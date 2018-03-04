@@ -1,6 +1,6 @@
 <?php declare(strict_types=1);
 
-namespace Nessworthy\TextMarketer\Endpoint;
+namespace Nessworthy\TextMarketer;
 
 use GuzzleHttp\Client;
 use GuzzleHttp\ClientInterface;
@@ -13,6 +13,14 @@ use Nessworthy\TextMarketer\Credit\TransferReport;
 use Nessworthy\TextMarketer\DeliveryReport\DateRange;
 use Nessworthy\TextMarketer\DeliveryReport\DeliveryReport;
 use Nessworthy\TextMarketer\DeliveryReport\DeliveryReportCollection;
+use Nessworthy\TextMarketer\Endpoint\AccountEndpoint;
+use Nessworthy\TextMarketer\Endpoint\CreditEndpoint;
+use Nessworthy\TextMarketer\Endpoint\DeliveryReportEndpoint;
+use Nessworthy\TextMarketer\Endpoint\EndpointError;
+use Nessworthy\TextMarketer\Endpoint\EndpointException;
+use Nessworthy\TextMarketer\Endpoint\GroupEndpoint;
+use Nessworthy\TextMarketer\Endpoint\KeywordEndpoint;
+use Nessworthy\TextMarketer\Endpoint\MessageEndpoint;
 use Nessworthy\TextMarketer\Keyword\KeywordAvailability;
 use Nessworthy\TextMarketer\Message\InvalidMessageException;
 use Nessworthy\TextMarketer\Message\Part\PhoneNumberCollection;
@@ -437,6 +445,10 @@ final class TextMarketer implements MessageEndpoint, CreditEndpoint, KeywordEndp
 
         if ($message->hasHourValidity()) {
             $return['validity'] = $message->getValidity();
+        }
+
+        if ($message->hasCustomTag()) {
+            $return['custom'] = $message->getCustomTag();
         }
 
         $return['check_stop'] = $message->isCheckSTOPEnabled();

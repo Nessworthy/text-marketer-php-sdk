@@ -60,25 +60,16 @@ class SendMessage
         $this->txtUsEmail = $txtUsEmail;
     }
 
-    /**
-     * @inheritDoc
-     */
     public function getMessageText(): string
     {
         return $this->payload->getPayload();
     }
 
-    /**
-     * @inheritDoc
-     */
     public function getMessageRecipients(): array
     {
         return $this->phoneNumbers->asArray();
     }
 
-    /**
-     * @inheritDoc
-     */
     public function getMessageOriginator(): string
     {
         return $this->originator->getOriginator();
@@ -124,6 +115,12 @@ class SendMessage
         return $this->checkSTOP;
     }
 
+
+    public function hasTxtUsEmail(): bool
+    {
+        return $this->txtUsEmail !== null;
+    }
+
     public function getTxtUsEmail(): ?string
     {
         return $this->txtUsEmail;
@@ -156,10 +153,5 @@ class SendMessage
         }
 
         $this->phoneNumbers = $numbers;
-    }
-
-    public function hasTxtUsEmail(): bool
-    {
-        return $this->txtUsEmail !== null;
     }
 }
