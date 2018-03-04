@@ -2,7 +2,7 @@
 
 namespace Nessworthy\TextMarketer\SendGroup;
 
-final class SendGroupSummary
+class SendGroupSummary
 {
     /**
      * @var int

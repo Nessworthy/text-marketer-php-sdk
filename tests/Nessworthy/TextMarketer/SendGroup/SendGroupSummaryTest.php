@@ -34,7 +34,7 @@ class SendGroupSummaryTest extends TestCase
         $sendGroupSummaryWithFalseStopGroup = new SendGroupSummary('someid', 'Group Name', 10, false);
         $this->assertFalse($sendGroupSummaryWithFalseStopGroup->isStopGroup());
 
-        $sendGroupSummaryWithFalseStopGroup = new SendGroupSummary('someid', 'Group Name', 10, true);
-        $this->assertTrue($sendGroupSummaryWithFalseStopGroup->isStopGroup());
+        $sendGroupSummaryWithTrueStopGroup = new SendGroupSummary('someid', 'Group Name', 10, true);
+        $this->assertTrue($sendGroupSummaryWithTrueStopGroup->isStopGroup());
     }
 }
