@@ -3,7 +3,7 @@ namespace Nessworthy\TextMarketer\Message\Part;
 
 use Nessworthy\TextMarketer\Message\InvalidMessageException;
 
-final class PhoneNumberCollection
+class PhoneNumberCollection
 {
     private $phoneNumbers;
 
