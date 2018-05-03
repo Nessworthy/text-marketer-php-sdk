@@ -1,5 +1,5 @@
 {
-  "name": "snes/textmarketer",
+  "name": "nessworthy/textmarketer",
   "description": "An unofficial helper to allow you to send SMS messages using Text Marketer.",
   "minimum-stability": "stable",
   "license": "proprietary",
