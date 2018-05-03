@@ -1,5 +1,5 @@
 {
-  "name": "nessworthy/textmarketer-php-sdk",
+  "name": "snes/textmarketer",
   "description": "An unofficial helper to allow you to send SMS messages using Text Marketer.",
   "minimum-stability": "stable",
   "license": "proprietary",
@@ -11,7 +11,6 @@
   ],
   "require": {
     "php": ">=7.1",
-    "roave/security-advisories": "dev-master",
     "guzzlehttp/guzzle": "^6.3"
   },
   "autoload": {
@@ -25,6 +24,7 @@
     }
   },
   "require-dev": {
+    "roave/security-advisories": "dev-master",
     "phpunit/phpunit": "^6.5"
   }
 }
