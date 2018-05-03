@@ -10,7 +10,7 @@ An unofficial library-in-progress to assist with text marketer API interactions.
 ## Composer
 
 ```
-composer require nessworthy\textmarketer-php-sdk
+composer require nessworthy\textmarketer
 ```
 
 ## Example Usage
