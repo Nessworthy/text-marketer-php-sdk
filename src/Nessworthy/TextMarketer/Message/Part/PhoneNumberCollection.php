@@ -20,7 +20,7 @@ class PhoneNumberCollection
             if (!\is_string($phoneNumber)) {
                 throw new InvalidMessageException(
                     sprintf(
-                        'Phone numbers must only be provided as strings. The number as position %s was of type %s.',
+                        'Phone numbers must only be provided as strings. The number at position %s was of type %s.',
                         $index,
                         \gettype($phoneNumber)
                     ),
