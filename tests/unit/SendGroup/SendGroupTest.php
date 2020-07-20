@@ -1,6 +1,6 @@
 <?php
 
-namespace Nessworthy\TextMarketer\Tests\SendGroup;
+namespace Nessworthy\TextMarketer\Test\Unit\SendGroup;
 
 use Nessworthy\TextMarketer\Message\Part\PhoneNumberCollection;
 use Nessworthy\TextMarketer\SendGroup\SendGroup;

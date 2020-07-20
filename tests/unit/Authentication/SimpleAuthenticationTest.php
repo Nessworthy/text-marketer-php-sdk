@@ -1,6 +1,6 @@
 <?php declare(strict_types=1);
 
-namespace Nessworthy\TextMarketer\Tests\Authentication;
+namespace Nessworthy\TextMarketer\Test\Unit\Authentication;
 
 use Nessworthy\TextMarketer\Authentication\InvalidAuthenticationException;
 use Nessworthy\TextMarketer\Authentication\Simple;

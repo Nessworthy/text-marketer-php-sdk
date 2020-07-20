@@ -1,6 +1,6 @@
 <?php declare(strict_types=1);
 
-namespace Nessworthy\TextMarketer\Tests\Account;
+namespace Nessworthy\TextMarketer\Test\Unit\Account;
 
 use Nessworthy\TextMarketer\Account\AccountInformationException;
 use Nessworthy\TextMarketer\Account\UpdateAccountInformation;

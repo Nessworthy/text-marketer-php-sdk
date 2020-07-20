@@ -1,5 +1,5 @@
 <?php
-namespace Nessworthy\TextMarketer\Tests\DeliveryReport;
+namespace Nessworthy\TextMarketer\Test\Unit\DeliveryReport;
 
 use Nessworthy\TextMarketer\DeliveryReport\DeliveryReport;
 use Nessworthy\TextMarketer\DeliveryReport\DeliveryReportCollection;

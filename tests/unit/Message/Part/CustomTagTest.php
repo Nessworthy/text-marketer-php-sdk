@@ -1,6 +1,6 @@
 <?php declare(strict_types=1);
 
-namespace Nessworthy\TextMarketer\Tests\Message\Part;
+namespace Nessworthy\TextMarketer\Test\Unit\Message\Part;
 
 use Nessworthy\TextMarketer\Message\InvalidMessageException;
 use Nessworthy\TextMarketer\Message\Part\CustomTag;

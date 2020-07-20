@@ -11,7 +11,8 @@
   ],
   "require": {
     "php": ">=7.1",
-    "guzzlehttp/guzzle": "^6.3"
+    "guzzlehttp/guzzle": "^7.0",
+    "ext-dom": "*"
   },
   "autoload": {
     "psr-4": {
@@ -20,7 +21,8 @@
   },
   "autoload-dev": {
     "psr-4": {
-      "Nessworthy\\TextMarketer\\Tests\\" : "tests/Nessworthy/TextMarketer/"
+      "Nessworthy\\TextMarketer\\Test\\Unit\\" : "tests/unit",
+      "Nessworthy\\TextMarketer\\Test\\Integration\\" : "tests/integration"
     }
   },
   "require-dev": {

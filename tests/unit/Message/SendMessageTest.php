@@ -1,6 +1,6 @@
 <?php declare(strict_types=1);
 
-namespace Nessworthy\TextMarketer\Tests\Message;
+namespace Nessworthy\TextMarketer\Test\Unit\Message;
 
 use Nessworthy\TextMarketer\Message\InvalidMessageException;
 use Nessworthy\TextMarketer\Message\SendMessage;
@@ -8,7 +8,7 @@ use PHPUnit\Framework\TestCase;
 
 /**
  * Class SendMessageTest
- * @package Nessworthy\TextMarketer\Tests\Message
+ * @package Nessworthy\TextMarketer\Test\Unit\Message
  *
  * Just a note: Validation testing is done in the Part VOs.
  */

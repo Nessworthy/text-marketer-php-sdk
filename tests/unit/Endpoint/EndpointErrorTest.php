@@ -1,5 +1,5 @@
 <?php
-namespace Nessworthy\TextMarketer\Tests\Endpoint;
+namespace Nessworthy\TextMarketer\Test\Unit\Endpoint;
 
 use Nessworthy\TextMarketer\Endpoint\EndpointError;
 use PHPUnit\Framework\TestCase;

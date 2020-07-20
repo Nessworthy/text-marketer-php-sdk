@@ -2,13 +2,16 @@
 
 namespace Nessworthy\TextMarketer;
 
+use DateTimeImmutable;
+use DOMDocument;
+use DOMNode;
+use DomNodeList;
 use GuzzleHttp\Client;
 use GuzzleHttp\ClientInterface;
 use GuzzleHttp\Exception\ClientException;
 use Nessworthy\TextMarketer\Account\AccountInformation;
 use Nessworthy\TextMarketer\Account\CreateSubAccount;
 use Nessworthy\TextMarketer\Account\UpdateAccountInformation;
-use Nessworthy\TextMarketer\Authentication;
 use Nessworthy\TextMarketer\Credit\TransferReport;
 use Nessworthy\TextMarketer\DeliveryReport\DateRange;
 use Nessworthy\TextMarketer\DeliveryReport\DeliveryReport;
@@ -85,7 +88,7 @@ final class TextMarketer implements MessageEndpoint, CreditEndpoint, KeywordEndp
     /**
      * @inheritDoc
      */
-    public function sendScheduledMessage(SendMessage $message, \DateTimeImmutable $deliveryTime): MessageDeliveryReport
+    public function sendScheduledMessage(SendMessage $message, DateTimeImmutable $deliveryTime): MessageDeliveryReport
     {
         $data = $this->buildSendMessageRequestParameters($message);
         $data['schedule'] = $deliveryTime->format('c');
@@ -264,7 +267,7 @@ final class TextMarketer implements MessageEndpoint, CreditEndpoint, KeywordEndp
 
         $groupElements = $response->getElementsByTagName('group');
 
-        /** @var \DOMNode $groupElement */
+        /** @var DOMNode $groupElement */
         foreach ($groupElements as $groupElement) {
             $groups[] = new SendGroupSummary(
                 $groupElement->attributes->getNamedItem('id')->textContent,
@@ -299,17 +302,17 @@ final class TextMarketer implements MessageEndpoint, CreditEndpoint, KeywordEndp
         $stopped = [];
         $duplicates = [];
 
-        /** @var \DOMNode $addedNumberNode */
+        /** @var DOMNode $addedNumberNode */
         foreach($addedNumberNodes as $addedNumberNode) {
             $added[] = $addedNumberNode->textContent;
         }
 
-        /** @var \DOMNode $stoppedNumberNode */
+        /** @var DOMNode $stoppedNumberNode */
         foreach($stoppedNumberNodes as $stoppedNumberNode) {
             $added[] = $stoppedNumberNode->textContent;
         }
 
-        /** @var \DOMNode $duplicateNumberNode */
+        /** @var DOMNode $duplicateNumberNode */
         foreach($duplicateNumberNodes as $duplicateNumberNode) {
             $added[] = $duplicateNumberNode->textContent;
         }
@@ -350,7 +353,7 @@ final class TextMarketer implements MessageEndpoint, CreditEndpoint, KeywordEndp
      */
     public function getDeliveryReportList(): DeliveryReportCollection
     {
-        $response = $this->toDomDocument($this->sendGetRequest($this->buildEndpointUri('deliveryReport')));
+        $response = $this->toDomDocument($this->sendGetRequest($this->buildEndpointUri('deliveryReports')));
 
         return $this->handleDeliveryReportResponse($response);
     }
@@ -457,13 +460,13 @@ final class TextMarketer implements MessageEndpoint, CreditEndpoint, KeywordEndp
     }
 
     /**
-     * @param \DomNodeList $errors
+     * @param DomNodeList $errors
      * @return EndpointError[]
      */
     private function buildEndpointErrors($errors): array
     {
         $errorList = [];
-        /** @var \DOMNode $error */
+        /** @var DOMNode $error */
         foreach ($errors as $error) {
             $errorList[] = new EndpointError(
                 (int) $error->attributes->getNamedItem('code'),
@@ -510,10 +513,10 @@ final class TextMarketer implements MessageEndpoint, CreditEndpoint, KeywordEndp
     }
 
     /**
-     * @param \DOMDocument $domDocument
+     * @param DOMDocument $domDocument
      * @throws EndpointException
      */
-    private function handleAnyErrors(\DOMDocument $domDocument): void
+    private function handleAnyErrors(DOMDocument $domDocument): void
     {
         $errors = $domDocument->getElementsByTagName('errors');
 
@@ -522,24 +525,24 @@ final class TextMarketer implements MessageEndpoint, CreditEndpoint, KeywordEndp
         }
     }
 
-    private function getTagContentByName(string $name, \DOMDocument $response): string
+    private function getTagContentByName(string $name, DOMDocument $response): string
     {
         return $response->getElementsByTagName($name)->item(0)->textContent;
     }
 
-    private function toDomDocument(string $xml): \DOMDocument
+    private function toDomDocument(string $xml): DOMDocument
     {
-        $domDocument = new \DOMDocument();
+        $domDocument = new DOMDocument();
         $domDocument->loadXML($xml);
         return $domDocument;
     }
 
     /**
-     * @param \DOMDocument $response
+     * @param DOMDocument $response
      * @return MessageDeliveryReport
      * @throws EndpointException
      */
-    private function handleSendMessageResponse(\DOMDocument $response): MessageDeliveryReport
+    private function handleSendMessageResponse(DOMDocument $response): MessageDeliveryReport
     {
 
         $this->handleAnyErrors($response);
@@ -591,11 +594,11 @@ final class TextMarketer implements MessageEndpoint, CreditEndpoint, KeywordEndp
     }
 
     /**
-     * @param \DOMDocument $response
+     * @param DOMDocument $response
      * @return AccountInformation
      * @throws EndpointException
      */
-    private function handleAccountResponse(\DOMDocument $response): AccountInformation
+    private function handleAccountResponse(DOMDocument $response): AccountInformation
     {
         $this->handleAnyErrors($response);
 
@@ -604,7 +607,7 @@ final class TextMarketer implements MessageEndpoint, CreditEndpoint, KeywordEndp
             $this->getTagContentByName('api_username', $response),
             $this->getTagContentByName('api_password', $response),
             $this->getTagContentByName('company_name', $response),
-            new \DateTimeImmutable($this->getTagContentByName('create_date', $response)),
+            new DateTimeImmutable($this->getTagContentByName('create_date', $response)),
             (int) $this->getTagContentByName('credits', $response),
             $this->getTagContentByName('notification_email', $response),
             $this->getTagContentByName('notification_mobile', $response),
@@ -614,11 +617,11 @@ final class TextMarketer implements MessageEndpoint, CreditEndpoint, KeywordEndp
     }
 
     /**
-     * @param \DOMDocument $response
+     * @param DOMDocument $response
      * @return SendGroup
      * @throws EndpointException
      */
-    private function handleGroupResponse(\DOMDocument $response): SendGroup
+    private function handleGroupResponse(DOMDocument $response): SendGroup
     {
         $this->handleAnyErrors($response);
 
@@ -627,7 +630,7 @@ final class TextMarketer implements MessageEndpoint, CreditEndpoint, KeywordEndp
         $numberElements = $groupElement->getElementsByTagName('number');
         $numbers = [];
 
-        /** @var \DOMNode $numberElement */
+        /** @var DOMNode $numberElement */
         foreach ($numberElements as $numberElement) {
             $numbers[] = $numberElement->textContent;
         }
@@ -645,11 +648,11 @@ final class TextMarketer implements MessageEndpoint, CreditEndpoint, KeywordEndp
     }
 
     /**
-     * @param \DOMDocument $response
+     * @param DOMDocument $response
      * @return DeliveryReportCollection
      * @throws EndpointException
      */
-    private function handleDeliveryReportResponse(\DOMDocument $response): DeliveryReportCollection
+    private function handleDeliveryReportResponse(DOMDocument $response): DeliveryReportCollection
     {
         $this->handleAnyErrors($response);
 
@@ -658,11 +661,11 @@ final class TextMarketer implements MessageEndpoint, CreditEndpoint, KeywordEndp
         $reportElements = $reportParentElement->getElementsByTagName('report');
         $reports = [];
 
-        /** @var \DOMNode $reportElement */
+        /** @var DOMNode $reportElement */
         foreach ($reportElements as $reportElement) {
             $reports[] = new DeliveryReport(
                 $reportElement->attributes->getNamedItem('name')->textContent,
-                new \DateTimeImmutable($reportElement->attributes->getNamedItem('last_updated')->textContent),
+                new DateTimeImmutable($reportElement->attributes->getNamedItem('last_updated')->textContent),
                 $reportElement->attributes->getNamedItem('extension')->textContent
             );
         }

@@ -1,6 +1,6 @@
 <?php
 
-namespace Nessworthy\TextMarketer\Tests\Keyword;
+namespace Nessworthy\TextMarketer\Test\Unit\Keyword;
 
 use Nessworthy\TextMarketer\Keyword\KeywordAvailability;
 use PHPUnit\Framework\TestCase;
