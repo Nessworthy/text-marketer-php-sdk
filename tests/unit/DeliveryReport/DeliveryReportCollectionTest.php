@@ -9,7 +9,7 @@ class DeliveryReportCollectionTest extends TestCase
 {
     private $stubbedReports;
 
-    public function setUp()
+    public function setUp(): void
     {
         $stubbedReports = [];
         $stubbedReports[] = $this->createMock(DeliveryReport::class);

@@ -10,7 +10,7 @@ class TransferReportTest extends TestCase
     /** @var TransferReport */
     private $report;
 
-    public function setUp()
+    public function setUp(): void
     {
         parent::setUp();
         $this->report = new TransferReport(100, 200, 300, 400);

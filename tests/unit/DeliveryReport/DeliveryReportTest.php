@@ -10,7 +10,7 @@ class DeliveryReportTest extends TestCase
     private $report;
     private $updated;
 
-    public function setUp()
+    public function setUp(): void
     {
         parent::setUp();
         $updated = new \DateTimeImmutable();

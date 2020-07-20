@@ -11,7 +11,7 @@ class DateRangeTest extends TestCase
     /** @var DateRange */
     private $range;
 
-    public function setUp()
+    public function setUp(): void
     {
         parent::setUp();
         $before = new \DateTimeImmutable('2017-01-01 00:00:00');

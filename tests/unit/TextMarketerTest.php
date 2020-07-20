@@ -24,7 +24,7 @@ class TextMarketerTest extends TestCase
      */
     private $httpClient;
 
-    public function setUp()
+    public function setUp(): void
     {
         /** @var Authentication|MockObject $credentials */
         $credentials = $this->createMock(Authentication::class);

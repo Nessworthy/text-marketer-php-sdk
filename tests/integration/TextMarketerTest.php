@@ -20,7 +20,7 @@ class TextMarketerTest extends TestCase
      */
     private $textMarketer;
 
-    public function setUp()
+    public function setUp(): void
     {
         $this->textMarketer = new TextMarketer(
             new Authentication\Simple(getenv('TM_SANDBOX_USER'), getenv('TM_SANDBOX_PASSWORD')),
