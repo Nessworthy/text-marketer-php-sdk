@@ -45,8 +45,9 @@ composer require nessworthy\textmarketer
 
 ```php
 $apiCredentials = new \Nessworthy\TextMarketer\Authentication\Simple('api_username', 'api_password');
+$httpClient = new \GuzzleHttp\Client();
 
-$textMarketer = new \Nessworthy\TextMarketer\TextMarketer($apiCredentials);
+$textMarketer = new \Nessworthy\TextMarketer\TextMarketer($apiCredentials, $httpClient);
 ```
 
 #### Parameters
