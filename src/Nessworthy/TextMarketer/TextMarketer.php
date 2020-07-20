@@ -56,17 +56,13 @@ final class TextMarketer implements MessageEndpoint, CreditEndpoint, KeywordEndp
      * TextMarketer constructor.
      * @param Authentication $authentication The authentication which holds the current account's API credentials.
      * @param string $endpoint The endpoint URI as a string. Defaults to production / live.
-     * @param ClientInterface|null $httpClient The HTTP dispatcher and handler. Defaults to a new instance of GuzzleHTTP's Client.
+     * @param ClientInterface $httpClient The HTTP dispatcher and handler.
      */
     public function __construct(
         Authentication $authentication,
-        string $endpoint = self::ENDPOINT_PRODUCTION,
-        ClientInterface $httpClient = null
+        ClientInterface $httpClient,
+        string $endpoint = self::ENDPOINT_PRODUCTION
     ) {
-        if ($httpClient === null) {
-            $httpClient = new Client();
-        }
-
         $this->httpClient = $httpClient;
         $this->authentication = $authentication;
         $this->endpoint = $endpoint;

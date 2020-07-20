@@ -5,7 +5,8 @@ An unofficial library-in-progress to assist with text marketer API interactions.
 ## Requirements
 
 * PHP 7.1+
-* ext_mbstring
+* ext-mbstring
+* ext-dom
 
 ## Composer
 

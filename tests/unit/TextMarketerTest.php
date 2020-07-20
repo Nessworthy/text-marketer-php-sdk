@@ -40,7 +40,7 @@ class TextMarketerTest extends TestCase
         $fakeHttpClient = $this->createMock(ClientInterface::class);
         $this->httpClient = $fakeHttpClient;
 
-        $this->textMarketer = new TextMarketer($credentials, 'http://fakeendpoint.local', $fakeHttpClient);
+        $this->textMarketer = new TextMarketer($credentials, $fakeHttpClient, 'http://fakeendpoint.local');
     }
 
     public function testSendMessage()
