@@ -24,8 +24,8 @@ class TextMarketerTest extends TestCase
     {
         $this->textMarketer = new TextMarketer(
             new Authentication\Simple(getenv('TM_SANDBOX_USER'), getenv('TM_SANDBOX_PASSWORD')),
-            TextMarketer::ENDPOINT_SANDBOX,
-            new Client
+            new Client,
+            TextMarketer::ENDPOINT_SANDBOX
         );
     }
 
@@ -72,6 +72,7 @@ class TextMarketerTest extends TestCase
             'IntTest'
         );
         $this->textMarketer->sendScheduledMessage($message, (new DateTimeImmutable)->modify('+1 hour'));
+
         self::assertTrue(true);
     }
 
