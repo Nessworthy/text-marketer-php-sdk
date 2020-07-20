@@ -41,9 +41,7 @@ class ValidityTest extends TestCase
         return [
             [0],
             [-1],
-            [-10],
-            [-1e2],
-            [-77],
+            [-1000],
         ];
     }
 
@@ -51,9 +49,7 @@ class ValidityTest extends TestCase
     {
         return [
             [73],
-            [730],
-            [7300],
-            [10e3],
+            [73000]
         ];
     }
 }
