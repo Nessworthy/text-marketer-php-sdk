@@ -4,7 +4,7 @@ An unofficial library-in-progress to assist with text marketer API interactions.
 
 ## Requirements
 
-* PHP 7.2.5 or higher
+* PHP 7.3 or higher
 * `ext-mbstring`
 * `ext-dom`
 
