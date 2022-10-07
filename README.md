@@ -1,4 +1,4 @@
-# Text Marketer PHP SDK [![Build Status](https://travis-ci.org/Nessworthy/text-marketer-php-sdk.svg?branch=master)](https://travis-ci.org/Nessworthy/text-marketer-php-sdk)
+# Text Marketer PHP SDK [![CircleCI](https://dl.circleci.com/status-badge/img/gh/Nessworthy/text-marketer-php-sdk/tree/master.svg?style=svg)](https://dl.circleci.com/status-badge/redirect/gh/Nessworthy/text-marketer-php-sdk/tree/master)
 
 An unofficial library-in-progress to assist with text marketer API interactions.
 
